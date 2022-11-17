@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+        
         <title>@yield('title') - Reserva Equipos</title>
 
         <!-- Bootstrap CSS -->
@@ -56,5 +56,7 @@
               <p class="text-muted">© 2022 JHG <a href="http://iesriberadecastilla.centros.educa.jcyl.es/sitio/" target="_blank">--IES Riebra de Castilla--</a></p>
             </div>
           </footer>
+
+          <script type="text/javascript" src="./js/app.js"></script>
     </body>
 </html>

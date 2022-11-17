@@ -1,10 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Register')
+@section('template_title')
+    Create User
+@endsection
 
 @section('content')
-
-<!-- formulario de registro codigo, email, password, nombre y apellido-->
+    <!-- formulario de registro codigo, email, password, nombre y apellido-->
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -107,5 +108,4 @@
         </div>
     </div>
 </div>
-
 @endsection

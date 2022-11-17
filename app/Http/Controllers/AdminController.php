@@ -16,8 +16,4 @@ class AdminController extends Controller
         return view('admin.gestion');
     }
 
-    public function profesores()
-    {
-        return view('admin.gestion.profesores');
-    }
 }

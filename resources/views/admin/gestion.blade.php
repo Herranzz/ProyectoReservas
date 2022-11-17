@@ -12,7 +12,7 @@
                     <div class="card-body" style="height: 33%; background-color:#fdebd0;">
                       <h5 class="card-title ">Profesores</h5>
                         <p class="card-text"></p>
-                        <a href="#" class="btn btn-warning">
+                        <a href="{{ route('users.index') }}" class="btn btn-warning">
                             <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
