@@ -62,4 +62,17 @@ class RegisterController extends Controller
         $user->delete();
         return redirect()->to('/admin/gestion/usuarios');
     }
+
+    //verificar que el codigo no se repita
+    public function verificarCodigo(Request $request)
+    {
+        $user = User::where('codigo', $request->codigo)->first();
+        if($user){
+            return response()->json(['message' => 'El codigo ya existe'], 200);
+        }else{
+            return response()->json(['message' => 'El codigo no existe'], 200);
+        }
+    }
+
+    //funcion import csv
 }

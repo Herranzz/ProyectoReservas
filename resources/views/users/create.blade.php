@@ -12,6 +12,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Registrar') }}</div>
 
+                <!--si el codigo del usuario ya esxiste en la base de datos mostrar-->
                 <div class="card-body">
                     <form method="POST" action="">
                         <!--Por motivos de seguridad se añade el siguiente @-->
@@ -49,6 +50,7 @@
                             <div class="col-md-6">
                                 <input id="codigo" type="text" class="form-control " name="codigo" value="{{ old('codigo') }}" required autocomplete="codigo" autofocus>
 
+                                <!--codigo de error de que el codigo está duplicado-->
                                 @error('codigo')
                                     <div class="alert alert-danger" role="alert"> {{ $message }} </div>
                                 @enderror

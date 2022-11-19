@@ -13,10 +13,10 @@
                     <div class="card-header">{{ __('Registrar') }}</div>
     
                     <div class="card-body">
-                        <form method="PUT" action="{{ route('users.update', $user->codigo) }}">
+                        <form method="POST" action="{{ route('users.update', $user->codigo) }}">
                             <!--Por motivos de seguridad se añade el siguiente @-->
                             @csrf
-    
+                            @method('PUT')
                               <div class="form-group row">
                                 <label for="nombre" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
     

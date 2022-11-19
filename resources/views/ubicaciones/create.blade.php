@@ -1,30 +1,49 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Create Ubicacione
+    Create Ubicacion
 @endsection
 
 @section('content')
-    <section class="content container-fluid">
-        <div class="row">
-            <div class="col-md-12">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Nueva Ubicación') }}</div>
 
-                @includeif('partials.errors')
+                <!--si el codigo del usuario ya esxiste en la base de datos mostrar-->
+                <div class="card-body">
+                    <form method="POST" action="">
+                        <!--Por motivos de seguridad se añade el siguiente @-->
+                        @csrf
 
-                <div class="card card-default">
-                    <div class="card-header">
-                        <span class="card-title">Create Ubicacione</span>
-                    </div>
-                    <div class="card-body">
-                        <form method="POST" action="{{ route('ubicaciones.store') }}"  role="form" enctype="multipart/form-data">
-                            @csrf
+                          <div class="form-group row">
+                            <label for="aula" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Aula') }}</label>
 
-                            @include('ubicacione.form')
+                            <div class="col-md-6">
+                                <input id="aula" type="text" class="form-control " name="aula" value="{{ old('aula') }}" required autocomplete="aula" autofocus>
 
-                        </form>
-                    </div>
+                                @error('aula')
+                                    <div class="alert alert-danger" role="alert"> {{ $message }} </div>
+                                @enderror
+
+                            </div>
+                        </div>
+
+                        <!--boton registrar-->
+                        <div class="form-group row">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Registrar') }}
+                                </button>
+                                <!--boton para cancelar-->
+                                <a href="{{ route('ubicaciones.index') }}" class="btn btn-danger">Cancelar</a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</div>
 @endsection

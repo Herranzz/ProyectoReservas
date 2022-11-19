@@ -24,7 +24,7 @@
                     <div class="card-body" style="height: 33%; background-color: #f9e79f;">
                       <h5 class="card-title ">Ubicaciones</h5>
                         <p class="card-text"></p>
-                        <a href="#" class="btn btn-warning">
+                        <a href="{{ route('ubicaciones.index') }}" class="btn btn-warning">
                             <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
