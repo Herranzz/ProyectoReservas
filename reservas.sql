@@ -13,9 +13,12 @@ create table if not exists users(
 
 create table if not exists equipos(
     id int not null auto_increment primary key,
-    numSobremesa int(100) not null,
-    numPortatil int(100) not null,
-    numTablets int(100) not null
+    tipo varchar(50) not null,
+    marca varchar(50) not null,
+    modelo varchar(255) not null,
+    numSerie varchar(255) not null,
+    created_at timestamp,
+    updated_at timestamp
 );
 
 create table if not exists ubicacions(
@@ -38,12 +41,12 @@ create table if not exists inventario(
 create table if not exists reservas(
     codigoProfesor varchar(10) not null primary key,
     idEquipo int not null,
-    hora time not null,
-    fecha date not null,
+    ubicacion int not null,
     horaInicio time not null,
     horaFin time not null,
     fechaReserva date not null,
     created_at timestamp,
         FOREIGN KEY (codigoProfesor) REFERENCES users(codigo) on update cascade on delete cascade,
-        FOREIGN KEY (idEquipo) REFERENCES equipos(id)
+        FOREIGN KEY (idEquipo) REFERENCES equipos(id),
+        FOREIGN KEY (ubicacion) REFERENCES ubicacions(id)
 )

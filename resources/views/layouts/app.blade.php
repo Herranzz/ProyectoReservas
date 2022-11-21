@@ -15,10 +15,13 @@
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-        
 
         <!-- Font Awesome link -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+
+        <!--Full Calendar cdn core/main.js y daygrid/main.js de nodemodules-->
+        
+        
 
     </head>
     <!-- body con color de fondo rojo-->
@@ -26,8 +29,8 @@
         <!-- navbar -->
         <nav class="navbar navbar-expand-md bg-dark navbar-dark">
             <a class="navbar-brand" href="#">
-                <img src="#" alt="Logo" style="width:40px;">
-              </a>
+              <img src="{{ asset('/resources/images/ies-ribera-de-castilla_icon.jpg') }}" alt="Logo" style="width:40px;">
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -35,10 +38,12 @@
               <ul class="navbar-nav ml-auto">
                 @if(auth()->check())
                   <li class="nav-item">
-                    <p class="nav-link">Hola <b>{{ auth()->user()->nombre }}<b></p>
+                    <p class="nav-link">Hola <b>{{ auth()->user()->email }}<b></p>
                   </li>
                   <li class="nav-item">
-                      <a class="btn btn-danger" href=" {{ route('login.destroy')}}" >Logout</a>
+                      <a class="btn btn-danger" href=" {{ route('login.destroy')}}" >
+                        <i class="fas fa-sign-out-alt"></i>
+                      </a>
                   </li>
                 @else
                   <li class="nav-item">

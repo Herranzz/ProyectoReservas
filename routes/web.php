@@ -6,6 +6,7 @@ use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\UbicacionController;
+use App\Http\Controllers\ReservasController;
 
 Route::get('/', function () {
     return view('home');
@@ -50,4 +51,25 @@ Route::get('/admin/gestion/ubicaciones/actualizar/{id}', [UbicacionController::c
 Route::put('/admin/gestion/ubicaciones/{id}', [UbicacionController::class, 'update'])->name('ubicaciones.update');
 
 Route::delete('/admin/gestion/ubicaciones/eliminar/{id}', [UbicacionController::class, 'destroy'])->name('ubicaciones.destroy');
+//------------------------------------------------------------
+
+//crud reservas------------------------------------------------------------
+Route::get('/admin/gestion/reservas', [ReservasController::class, 'index'])->middleware('auth.admin')->name('reservas.index');
+
+Route::get('/admin/gestion/reservas/crear', [ReservasController::class, 'create'])->middleware('auth.admin')->name('reservas.create');
+
+Route::post('/admin/gestion/reservas/crear', [ReservasController::class, 'store'])->name('reservas.store');
+
+Route::get('/admin/gestion/reservas/actualizar/{id}', [ReservasController::class, 'edit'])->name('reservas.edit');
+
+Route::put('/admin/gestion/reservas/{id}', [ReservasController::class, 'update'])->name('reservas.update');
+
+Route::delete('/admin/gestion/reservas/eliminar/{id}', [ReservasController::class, 'destroy'])->name('reservas.destroy');
+
+Route::get('/admin/gestion/reservas/ver/{id}', [ReservasController::class, 'show'])->name('reservas.show');
+//------------------------------------------------------------
+
+//reservas parte usuario noraml------------------------------------------------------------
+Route::get('calendar-event', [ReservasController::class, 'index'])->name('fullcalender.index');
+Route::post('calendar-crud-ajax', [ReservasController::class, 'calendarEvents']);
 //------------------------------------------------------------

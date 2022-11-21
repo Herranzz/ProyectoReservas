@@ -13,7 +13,8 @@
                     <div class="card-body">
                       <h5 class="card-title">Reserva de equipos</h5>
                         <p class="card-text">Aplicación para reservar los equipos del centro disponibles.</p>
-                        <a href="#" class="btn btn-warning">Reservar</a>
+                        <!--ruta a la vista fullcalender-->
+                        <a href="#" class="btn btn-primary">Reservar</a>
                     </div>
                 </div>
             </div>
