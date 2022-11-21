@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\UbicacionController;
 use App\Http\Controllers\ReservasController;
+use App\Http\Controllers\EquiposController;
 
 Route::get('/', function () {
     return view('home');
@@ -69,7 +70,16 @@ Route::delete('/admin/gestion/reservas/eliminar/{id}', [ReservasController::clas
 Route::get('/admin/gestion/reservas/ver/{id}', [ReservasController::class, 'show'])->name('reservas.show');
 //------------------------------------------------------------
 
-//reservas parte usuario noraml------------------------------------------------------------
-Route::get('calendar-event', [ReservasController::class, 'index'])->name('fullcalender.index');
-Route::post('calendar-crud-ajax', [ReservasController::class, 'calendarEvents']);
+//crud equipos------------------------------------------------------------
+Route::get('/admin/gestion/equipos', [EquiposController::class, 'index'])->middleware('auth.admin')->name('equipos.index');
+
+Route::get('/admin/gestion/equipos/crear', [EquiposController::class, 'create'])->middleware('auth.admin')->name('equipos.create');
+
+Route::post('/admin/gestion/equipos/crear', [EquiposController::class, 'store'])->name('equipos.store');
+
+Route::get('/admin/gestion/equipos/actualizar/{id}', [EquiposController::class, 'edit'])->name('equipos.edit');
+
+Route::put('/admin/gestion/equipos/{id}', [EquiposController::class, 'update'])->name('equipos.update');
+
+Route::delete('/admin/gestion/equipos/eliminar/{id}', [EquiposController::class, 'destroy'])->name('equipos.destroy');
 //------------------------------------------------------------

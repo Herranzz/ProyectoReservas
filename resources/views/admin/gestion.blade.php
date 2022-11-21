@@ -36,7 +36,7 @@
                     <div class="card-body" style="height: 33%; background-color:#DAF7A6;">
                       <h5 class="card-title">Tipos de Equipos</h5>
                         <p class="card-text"></p>
-                        <a href="#" class="btn btn-warning">
+                        <a href="{{ route('equipos.index') }}" class="btn btn-warning">
                             <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
