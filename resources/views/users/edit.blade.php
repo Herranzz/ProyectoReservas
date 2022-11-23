@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('template_title')
-    Update User
-@endsection
+@section('title', 'Editar Profesor')
 
 @section('content')
     <!-- formulario de registro codigo, email, password, nombre y apellido-->

@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Crear Ubicacion')
+@section('title', 'Crear Tipo')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Nueva Ubicación') }}</div>
+                <div class="card-header">{{ __('Nuevo Tipo') }}</div>
 
                 <!--si el codigo del usuario ya esxiste en la base de datos mostrar-->
                 <div class="card-body">
@@ -16,16 +16,29 @@
                         @csrf
 
                           <div class="form-group row">
-                            <label for="aula" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Aula') }}</label>
+
+                            <label for="id" class="col-md-4 col-form-label text-md-right">{{ __('ID') }}</label>
 
                             <div class="col-md-6">
-                                <input id="aula" type="text" class="form-control " name="aula" value="{{ old('aula') }}" required autocomplete="aula" autofocus>
+                                <input id="id" type="text" class="form-control " name="id" value="{{ old('id') }}" required autocomplete="id" autofocus>
 
-                                @error('aula')
+                                @error('id')
                                     <div class="alert alert-danger" role="alert"> {{ $message }} </div>
                                 @enderror
 
                             </div>
+
+                            <label for="tipo" class="col-md-4 col-form-label text-md-right">{{ __('Tipo') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="tipo" type="text" class="form-control " name="tipo" value="{{ old('tipo') }}" required autocomplete="tipo" autofocus>
+
+                                @error('tipo')
+                                    <div class="alert alert-danger" role="alert"> {{ $message }} </div>
+                                @enderror
+
+                            </div>
+                            
                         </div>
 
                         <!--boton registrar-->
@@ -35,7 +48,7 @@
                                     {{ __('Registrar') }}
                                 </button>
                                 <!--boton para cancelar-->
-                                <a href="{{ route('ubicaciones.index') }}" class="btn btn-danger">Cancelar</a>
+                                <a href="{{ route('tipos.index') }}" class="btn btn-danger">Cancelar</a>
                             </div>
                         </div>
                     </form>

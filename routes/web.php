@@ -8,6 +8,7 @@ use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\UbicacionController;
 use App\Http\Controllers\ReservasController;
 use App\Http\Controllers\EquiposController;
+use App\Http\Controllers\TiposController;
 
 Route::get('/', function () {
     return view('home');
@@ -68,6 +69,20 @@ Route::put('/admin/gestion/reservas/{id}', [ReservasController::class, 'update']
 Route::delete('/admin/gestion/reservas/eliminar/{id}', [ReservasController::class, 'destroy'])->name('reservas.destroy');
 
 Route::get('/admin/gestion/reservas/ver/{id}', [ReservasController::class, 'show'])->name('reservas.show');
+//------------------------------------------------------------
+
+//crud tipos de equipos------------------------------------------------------------
+Route::get('/admin/gestion/tipos', [TiposController::class, 'index'])->middleware('auth.admin')->name('tipos.index');
+
+Route::get('/admin/gestion/tipos/crear', [TiposController::class, 'create'])->middleware('auth.admin')->name('tipos.create');
+
+Route::post('/admin/gestion/tipos/crear', [TiposController::class, 'store'])->name('tipos.store');
+
+Route::get('/admin/gestion/tipos/actualizar/{id}', [TiposController::class, 'edit'])->name('tipos.edit');
+
+Route::put('/admin/gestion/tipos/{id}', [TiposController::class, 'update'])->name('tipos.update');
+
+Route::delete('/admin/gestion/tipos/eliminar/{id}', [TiposController::class, 'destroy'])->name('tipos.destroy');
 //------------------------------------------------------------
 
 //crud equipos------------------------------------------------------------

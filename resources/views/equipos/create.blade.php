@@ -1,41 +1,30 @@
 @extends('layouts.app')
 
-@section('template_title', 'Equipos')
+@section('title', 'Añadir Equipos')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Registrar') }}</div>
+                <div class="card-header">{{ __('Añadir Equipo') }}</div>
                 <div class="card-body">
                     <form method="POST" action="">
                         <!--Por motivos de seguridad se añade el siguiente @-->
                         @csrf
 
-                          <div class="form-group row">
-                            <label for="id" class="col-md-4 col-form-label text-md-right">{{ __('Id') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="id" type="text" class="form-control " name="id" value="{{ old('id') }}" required autocomplete="id" disabled>
-
-                                @error('id')
-                                    <div class="alert alert-danger" role="alert"> {{ $message }} </div>
-                                @enderror
-
-                            </div>
-                        </div>
-
+                        <!--traer los tipos de la tabla externa tipos y pintarlo en un options-->
                         <div class="form-group row">
                             <label for="tipo" class="col-md-4 col-form-label text-md-right">{{ __('Tipo') }}</label>
-
                             <div class="col-md-6">
-                                <select id="tipo" type="text" class="form-control " name="tipo" value="{{ old('tipo') }}" required autocomplete="tipo" autofocus>
-                                    <option value="portatil">Portatil</option>
-                                    <option value="sobremesa">Sobremesa</option>
-                                    <option value="tablet">Tablet</option>
+                                <select id="tipo" type="text" class="form-control " name="tipo" value="{{ old('tipo') }}"
+                                    required autocomplete="tipo" autofocus>
+                                    @foreach ($tipos as $tipo)
+                                    <option value="{{ $tipo->tipo }}">{{ $tipo->tipo }}</option>
+                                    @endforeach
                                 </select>
                             </div>
+
                         </div>
 
                         <div class="form-group row">

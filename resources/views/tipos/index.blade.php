@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Ubicaciones')
+@section('title', 'Tipos de Equipos')
 
 @section('content')
     <!--tabla responsive-->
@@ -13,7 +13,7 @@
 
                 <div class="card">
 
-                    <div class="card-header">{{ __('Ubicaciones') }}</div>
+                    <div class="card-header">{{ __('Tipos de Equipos') }}</div>
 
                     <div class="card-body">
 
@@ -24,7 +24,7 @@
                                 <thead>
                                     <tr>
                                         <th>
-                                            <form method="get" action="{{ route('ubicaciones.create') }}">
+                                            <form method="get" action="{{ route('tipos.create') }}">
                                                 <!--Por motivos de seguridad se añade el siguiente @-->
                                                 @csrf
                                                 <div class="form-group row">
@@ -61,9 +61,7 @@
                                     </tr>
                                     <tr>
 
-                                        <th scope="col">IdAula</th>
-
-                                        <th scope="col">Aula</th>
+                                        <th scope="col">Tipos</th>
 
                                     </tr>
 
@@ -71,20 +69,20 @@
 
                                 <tbody>
 
-                                    @foreach ($ubicaciones as $dato)
+                                    @foreach ($tipos as $dato)
                                         <tr>
 
                                             <td>{{ $dato->id }}</td>
 
-                                            <td>{{ $dato->aula }}</td>
+                                            <td>{{ $dato->tipo }}</td>
 
                                             <td>
 
-                                                <form action="{{ route('ubicaciones.destroy', $dato->id) }}" id="delform"
+                                                <form action="{{ route('tipos.destroy', $dato->id) }}" id="delform"
                                                     method="POST">
 
                                                     <a class="btn btn-primary"
-                                                        href="{{ route('ubicaciones.edit', $dato->id) }}">
+                                                        href="{{ route('tipos.edit', $dato->id) }}">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
 

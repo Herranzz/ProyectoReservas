@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('template_title', 'Equipos')
+@section('title', 'Equipos')
 
 @section('content')
  <!--tabla responsive-->

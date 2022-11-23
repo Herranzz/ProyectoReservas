@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('template_title', 'Actualizar')
+@section('title', 'Editar Equipos')
 
 @section('content')
     <div class="row justify-content-center">
@@ -13,31 +13,19 @@
                         <!--Por motivos de seguridad se añade el siguiente @-->
                         @csrf
                         @method('PUT')
-                        <div class="form-group row">
-                            <label for="id" class="col-md-4 col-form-label text-md-right">{{ __('Id') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="id" type="text" class="form-control " name="id"
-                                    value="{{ $equipo->id }}" required autocomplete="id" disabled>
-
-                                @error('id')
-                                    <div class="alert alert-danger" role="alert"> {{ $message }} </div>
-                                @enderror
-
-                            </div>
-                        </div>
-
+                        <!--traer los tipos de la tabla externa tipos y pintarlo en un options-->
                         <div class="form-group row">
                             <label for="tipo" class="col-md-4 col-form-label text-md-right">{{ __('Tipo') }}</label>
-
                             <div class="col-md-6">
-                                <select id="tipo" type="text" class="form-control " name="tipo"
-                                    value="{{ $equipo->tipo }}" required autocomplete="tipo" autofocus>
-                                    <option value="portatil">Portatil</option>
-                                    <option value="sobremesa">Sobremesa</option>
-                                    <option value="tablet">Tablet</option>
+                                <select id="tipo" type="text" class="form-control " name="tipo" value="{{ old('tipo') }}"
+                                    required autocomplete="tipo" autofocus>
+                                    @foreach ($tipos as $tipo)
+                                    <option value="{{ $tipo->tipo }}">{{ $tipo->tipo }}</option>
+                                    @endforeach
                                 </select>
                             </div>
+
                         </div>
 
                         <div class="form-group row">

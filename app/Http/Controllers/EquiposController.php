@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Equipos;
+use App\Models\Tipos;
 
 class EquiposController extends Controller
 {
@@ -16,7 +17,11 @@ class EquiposController extends Controller
 
     public function create()
     {
-        return view('equipos.create');
+        $equipo = new Equipos();
+
+        $tipos = Tipos::all();
+        return view('equipos.create', compact('equipo', 'tipos'));
+
     }
 
     public function store(Request $request) {
@@ -34,8 +39,10 @@ class EquiposController extends Controller
 
     public function edit($id)
     {
+        $tipos = Tipos::all();
+
         $equipo = Equipos::find($id);
-        return view('equipos.edit', ['equipo' => $equipo]);
+        return view('equipos.edit', compact('equipo', 'tipos'));
     }
 
     public function update(Request $request)

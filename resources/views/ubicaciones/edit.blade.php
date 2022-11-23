@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('template_title')
-    Update Ubicacione
-@endsection
+@section('title', 'Editar Ubicacion')
 
 @section('content')
 <div class="container">
@@ -21,15 +19,6 @@
 
                             <div class="col-md-6">
                                 <input id="aula" type="text" class="form-control " name="aula" value="{{ $ubicacion->aula }}" required autocomplete="aula" autofocus>
-
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="id" class="col-md-4 col-form-label text-md-right">{{ __('IdAula') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="id" type="text" class="form-control " name="id" value="{{ $ubicacion->id }}" required autocomplete="id" readonly>
 
                             </div>
                         </div>

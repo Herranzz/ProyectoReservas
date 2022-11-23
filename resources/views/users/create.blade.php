@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('template_title')
-    Create User
-@endsection
+@section('title', 'Añadir Profesor')
 
 @section('content')
     <!-- formulario de registro codigo, email, password, nombre y apellido-->
