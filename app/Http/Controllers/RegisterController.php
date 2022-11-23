@@ -21,6 +21,15 @@ class RegisterController extends Controller
 
     public function store(Request $request) {
 
+        //validar que el codigo y el email no se repita
+        $request->validate([
+            'codigo' => 'unique:users',
+            'email' => 'unique:users'
+        ], [
+            'codigo.unique' => 'El codigo ya existe',
+            'email.unique' => 'El email ya existe'
+    ]);
+
         $user = new User();
         $user->nombre = $request->nombre;
         $user->apellido = $request->apellido;
@@ -31,7 +40,7 @@ class RegisterController extends Controller
 
         $user->save();
         
-        return redirect()->to('/admin/gestion/usuarios');
+        return redirect()->to('/admin/gestion/usuarios')->with('message', 'Profesor creado correctamente');
     }
 
     public function edit($codigo)
@@ -45,14 +54,13 @@ class RegisterController extends Controller
         $user = User::findOrFail($request->codigo);
         $user->nombre = $request->nombre;
         $user->apellido = $request->apellido;
-        $user->codigo = $request->codigo;
         $user->email = $request->email;
         $user->password = $request->password;
         $user->role = $request->role;
 
         $user->save();
         
-        return redirect()->to('/admin/gestion/usuarios');
+        return redirect()->to('/admin/gestion/usuarios')->with('message', 'Profesor actualizado correctamente');
     }
 
     //funcion para eliminar un usuario
@@ -60,18 +68,7 @@ class RegisterController extends Controller
     {
         $user = User::find($request->codigo);
         $user->delete();
-        return redirect()->to('/admin/gestion/usuarios');
-    }
-
-    //verificar que el codigo no se repita
-    public function verificarCodigo(Request $request)
-    {
-        $user = User::where('codigo', $request->codigo)->first();
-        if($user){
-            return response()->json(['message' => 'El codigo ya existe'], 200);
-        }else{
-            return response()->json(['message' => 'El codigo no existe'], 200);
-        }
+        return redirect()->to('/admin/gestion/usuarios')->with('message', 'Profesor eliminado correctamente');
     }
 
     //funcion import csv

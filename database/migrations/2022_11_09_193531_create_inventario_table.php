@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('inventario', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
-            $table->string('numInventario',255);
+            $table->string('id',255);
             $table->string('ubicacion',50)->constraint();
             $table->bigInteger('idEquipo',255)->unsigned();
             $table->string('descripcion',255);

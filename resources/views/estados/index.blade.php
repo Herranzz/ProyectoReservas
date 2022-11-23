@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tipos de Equipos')
+@section('title', 'Tipos de Estados')
 
 @section('content')
     <!--tabla responsive-->
@@ -13,7 +13,7 @@
 
                 <div class="card">
 
-                    <div class="card-header">{{ __('Tipos de Equipos') }}</div>
+                    <div class="card-header">{{ __('Tipos de Estados') }}</div>
 
                     <div class="card-body">
 
@@ -24,7 +24,7 @@
                                 <thead>
                                     <tr>
                                         <th>
-                                            <form method="get" action="{{ route('tipos.create') }}">
+                                            <form method="get" action="{{ route('estados.create') }}">
                                                 <!--Por motivos de seguridad se añade el siguiente @-->
                                                 @csrf
                                                 <div class="form-group row">
@@ -63,7 +63,7 @@
 
                                         <th scope="col">Id</th>
 
-                                        <th scope="col">Tipos</th>
+                                        <th scope="col">Estados</th>
 
                                     </tr>
 
@@ -71,20 +71,20 @@
 
                                 <tbody>
 
-                                    @foreach ($tipos as $dato)
+                                    @foreach ($estados as $dato)
                                         <tr>
 
                                             <td>{{ $dato->id }}</td>
 
-                                            <td>{{ $dato->tipo }}</td>
+                                            <td>{{ $dato->estado }}</td>
 
                                             <td>
 
-                                                <form action="{{ route('tipos.destroy', $dato->id) }}" id="delform"
+                                                <form action="{{ route('estados.destroy', $dato->id) }}" id="delform"
                                                     method="POST">
 
                                                     <a class="btn btn-primary"
-                                                        href="{{ route('tipos.edit', $dato->id) }}">
+                                                        href="{{ route('estados.edit', $dato->id) }}">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
 

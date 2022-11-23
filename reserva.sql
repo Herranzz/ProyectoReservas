@@ -25,9 +25,9 @@ create table if not exists equipos(
         FOREIGN KEY (tipo) references tipos(tipo) on update cascade on delete cascade
 );
 
-create table if not exists ubicacions(
-    id int not null auto_increment primary key,
-    aula varchar(30) not null
+create table if not exists ubicaciones(
+    id int not null,
+    aula varchar(50) not null primary key
 );
 
 create table if not exists estados(
@@ -36,13 +36,13 @@ create table if not exists estados(
 );
 
 create table if not exists inventario(
-    numInventario int(200) not null auto_increment primary key,
-    ubicacion int not null,
+    id int(200) not null auto_increment primary key,
+    ubicacion varchar(50) not null,
     idEquipo int not null,
-    descripcion varchar(100) not null,
+    descripcion varchar(100),
     estado varchar(30) not null,
         FOREIGN KEY (idEquipo) REFERENCES equipos(id) on update cascade on delete cascade,
-        FOREIGN KEY (ubicacion) REFERENCES ubicacions(id),
+        FOREIGN KEY (ubicacion) REFERENCES ubicaciones(aula),
         FOREIGN KEY (estado) REFERENCES estados(estado)
 );
 

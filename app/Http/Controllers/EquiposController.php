@@ -26,6 +26,13 @@ class EquiposController extends Controller
 
     public function store(Request $request) {
 
+        //validar que el numSerie no se repita
+        $request->validate([
+            'numSerie' => 'unique:equipos'
+        ], [
+            'numSerie.unique' => 'El número de serie ya existe'
+    ]);
+
         $equipo = new Equipos();
         $equipo->tipo = $request->tipo;
         $equipo->marca = $request->marca;
@@ -34,7 +41,7 @@ class EquiposController extends Controller
 
         $equipo->save();
         
-        return redirect()->to('/admin/gestion/equipos');
+        return redirect()->to('/admin/gestion/equipos')->with('message', 'Equipo añadido correctamente');
     }
 
     public function edit($id)
@@ -47,6 +54,12 @@ class EquiposController extends Controller
 
     public function update(Request $request)
     {
+        $request->validate([
+            'numSerie' => 'unique:equipos'
+        ], [
+            'numSerie.unique' => 'El número de serie ya existe'
+    ]);
+
         $equipo = Equipos::findOrFail($request->id);
         $equipo->tipo = $request->tipo;
         $equipo->marca = $request->marca;
@@ -55,7 +68,7 @@ class EquiposController extends Controller
 
         $equipo->save();
         
-        return redirect()->to('/admin/gestion/equipos');
+        return redirect()->to('/admin/gestion/equipos')->with('message', 'Equipo actualizado correctamente');
     }
 
     //funcion para eliminar un equipo
@@ -63,6 +76,6 @@ class EquiposController extends Controller
     {
         $equipo = Equipos::findOrFail($request->id);
         $equipo->delete();
-        return redirect()->to('/admin/gestion/equipos');
+        return redirect()->to('/admin/gestion/equipos')->with('message', 'Equipo eliminado correctamente');
     }
 }

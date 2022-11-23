@@ -22,6 +22,7 @@ class UbicacionController extends Controller
     public function store(Request $request) {
 
         $ubicacion = new Ubicacion();
+        $ubicacion->id = $request->id;
         $ubicacion->aula = $request->aula;
 
         $ubicacion->save();

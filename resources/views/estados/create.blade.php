@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Crear Ubicacion')
+@section('title', 'Crear Estado')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-5">
+        <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Nueva Ubicación') }}</div>
+                <div class="card-header">{{ __('Nuevo Estado') }}</div>
 
                 <!--si el codigo del usuario ya esxiste en la base de datos mostrar-->
                 <div class="card-body">
@@ -16,7 +16,7 @@
                         @csrf
 
                           <div class="form-group row">
-                            
+
                             <label for="id" class="col-md-4 col-form-label text-md-right">{{ __('ID') }}</label>
 
                             <div class="col-md-6">
@@ -28,17 +28,17 @@
 
                             </div>
 
-
-                            <label for="aula" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Aula') }}</label>
+                            <label for="estado" class="col-md-4 col-form-label text-md-right">{{ __('Estado') }}</label>
 
                             <div class="col-md-6">
-                                <input id="aula" type="text" class="form-control " name="aula" value="{{ old('aula') }}" required autocomplete="aula" autofocus>
+                                <input id="estado" type="text" class="form-control " name="estado" value="{{ old('estado') }}" required autocomplete="estado" autofocus>
 
-                                @error('aula')
+                                @error('estado')
                                     <div class="alert alert-danger" role="alert"> {{ $message }} </div>
                                 @enderror
 
                             </div>
+                            
                         </div>
 
                         <!--boton registrar-->
@@ -48,7 +48,7 @@
                                     {{ __('Registrar') }}
                                 </button>
                                 <!--boton para cancelar-->
-                                <a href="{{ route('ubicaciones.index') }}" class="btn btn-danger">Cancelar</a>
+                                <a href="{{ route('estados.index') }}" class="btn btn-danger">Cancelar</a>
                             </div>
                         </div>
                     </form>

@@ -9,7 +9,7 @@
 
         <div class="row justify-content-center">
 
-            <div class="col-md-12">
+            <div class="col-md-9">
 
                 <div class="card">
 
@@ -61,7 +61,7 @@
                                     </tr>
                                     <tr>
 
-                                        <th scope="col">IdAula</th>
+                                        <th scope="col">Id</th>
 
                                         <th scope="col">Aula</th>
 

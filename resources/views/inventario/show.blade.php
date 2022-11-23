@@ -21,8 +21,8 @@
                     <div class="card-body">
                         
                         <div class="form-group">
-                            <strong>Numinventario:</strong>
-                            {{ $inventario->numInventario }}
+                            <strong>id:</strong>
+                            {{ $inventario->id }}
                         </div>
                         <div class="form-group">
                             <strong>Ubicacion:</strong>

@@ -2,9 +2,9 @@
     <div class="box-body">
         
         <div class="form-group">
-            {{ Form::label('numInventario') }}
-            {{ Form::text('numInventario', $inventario->numInventario, ['class' => 'form-control' . ($errors->has('numInventario') ? ' is-invalid' : ''), 'placeholder' => 'Numinventario']) }}
-            {!! $errors->first('numInventario', '<div class="invalid-feedback">:message</div>') !!}
+            {{ Form::label('id') }}
+            {{ Form::text('id', $inventario->id, ['class' => 'form-control' . ($errors->has('id') ? ' is-invalid' : ''), 'placeholder' => 'id']) }}
+            {!! $errors->first('id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
             {{ Form::label('ubicacion') }}
