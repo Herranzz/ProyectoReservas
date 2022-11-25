@@ -26,12 +26,13 @@
                             </div>
                         </div>
 
-                        <!--traer el campo idEquipo de la tabla equipos-->
+                        <!--traer el campo idEquipo de la tabla equipos mostrando el idEquipo guardado-->
                         <div class="form-group row">
                             <label for="idEquipo" class="col-md-4 col-form-label text-md-right">{{ __('Equipo') }}</label>
                             <div class="col-md-6">
                                 <select id="idEquipo" type="text" class="form-control " name="idEquipo"
-                                    value="{{ old('idEquipo') }}" required autocomplete="idEquipo" autofocus>
+                                    value="{{ $inventario->idEquipo }}" required autocomplete="idEquipo" autofocus>
+                                    <option selected>{{ $inventario->idEquipo }}</option>
                                     @foreach ($equipo as $dato)
                                         <option value="{{ $dato->id }}">{{ $dato->id }}</option>
                                     @endforeach
@@ -45,7 +46,7 @@
 
                             <div class="col-md-6">
                                 <input id="descripcion" type="text" class="form-control " name="descripcion"
-                                    value="{{ $inventario->descripcion }}" required autocomplete="descripcion" autofocus>
+                                    value="{{ $inventario->descripcion }}" autocomplete="descripcion" autofocus>
 
                                 @error('descripcion')
                                     <div class="alert alert-danger" role="alert"> {{ $message }} </div>

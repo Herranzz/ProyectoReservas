@@ -7,13 +7,24 @@ use App\Models\Inventario;
 use App\Models\Ubicacion;
 use App\Models\Equipos;
 use App\Models\Estado;
+use Illuminate\Support\Facades\DB;
 
 class InventarioController extends Controller
 {
     public function index(Request $request)
     {
-        $inventario = Inventario::all();
-        return view('inventario.index', ['inventario' => $inventario]);
+        $texto=trim($request->get('texto'));
+
+        $inventario = DB::table('inventario')
+            ->select('inventario.*')
+            ->where('id','LIKE','%'.$texto.'%')
+            ->orWhere('ubicacion','LIKE','%'.$texto.'%')
+            ->orWhere('idEquipo','LIKE','%'.$texto.'%')
+            ->orWhere('estado','LIKE','%'.$texto.'%')
+            ->orderBy('id','asc')
+            ->paginate(10);
+
+        return view('inventario.index', compact('inventario','texto'));
     }
 
     public function create()
@@ -62,9 +73,12 @@ class InventarioController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'id' => 'unique:inventario'
+            'id' => 'unique:inventario',
+            //deje actualizar aunque el id sea el mismo
+            'idEquipo' => 'unique:inventario,idEquipo,'.$request->id
         ], [
-            'id.unique' => 'El número de inventario ya existe'
+            'id.unique' => 'El número de inventario ya existe',
+            'idEquipo.unique' => 'El id del equipo ya existe'
         ]);
 
         $inventario = Inventario::find($request->id);

@@ -5,23 +5,26 @@
 @section('content')
 
     <!--tabla responsive-->
-
     <div class="container">
-
         <div class="row justify-content-center">
-
             <div class="col-md-12">
-
                 <div class="card">
-
                     <div class="card-header">{{ __('Profesores') }}</div>
-
                     <div class="card-body">
-
                         <div class="table-responsive">
-
+                                <form action="{{ route('users.index') }}" method="get">
+                                    <div class="form-row">
+                                        <div class="col-sm-2">
+                                            <input type="text" class="form-control" name="texto" value="{{ $texto }}" placeholder="Buscar...">
+                                        </div>
+                                        <div class="col-auto">
+                                            <button type="submit" class="btn btn-info" value="Buscar">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
                             <table class="table table-striped table-hover">
-
                                 <thead>
                                     <tr>
                                         <th>
@@ -61,73 +64,50 @@
                                         </form>
                                     </tr>
                                     <tr>
-
                                         <th scope="col">Nombre</th>
-
                                         <th scope="col">Apellido</th>
-
                                         <th scope="col">Código</th>
-
                                         <th scope="col">Email</th>
-
                                         <th scope="col">Role</th>
-
                                     </tr>
-
                                 </thead>
-
                                 <tbody>
-
+                                    @if(count($users)<=0)
+                                        <tr>
+                                            <td colspan="5" class="text-center">
+                                                <!--alerta de que no hay datos-->
+                                                <div class="alert alert-danger" role="alert">
+                                                    No hay registros de la búsqueda...
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @else
                                     @foreach ($users as $dato)
                                         <tr>
-
                                             <td>{{ $dato->nombre }}</td>
-
                                             <td>{{ $dato->apellido }}</td>
-
                                             <td>{{ $dato->codigo }}</td>
-
                                             <td>{{ $dato->email }}</td>
-
                                             <td>{{ $dato->role }}</td>
-
                                             <td>
-
-                                                <form action="{{ route('users.destroy', $dato->codigo) }}" id="delform"
-                                                    method="POST">
-
-                                                    <a class="btn btn-primary" href="{{ route('users.edit', $dato->codigo) }}">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-
-                                                    @csrf
-
-                                                    {{ method_field('DELETE') }}
-
-
-                                                    <button type="submit" class="btn btn-danger">
-                                                        <i class="fas fa-trash-alt"></i>
-                                                    </button>
-
-                                                </form>
-
+                                                <a class="btn btn-warning" href="{{ route('users.edit', $dato->codigo) }}">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <!--boton que lanza el modal-->
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-{{ $dato->codigo }}">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
                                             </td>
-
                                         </tr>
+                                        @include('users.delete')
                                     @endforeach
-
+                                    @endif
                                 </tbody>
-
                             </table>
-
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
             <!--boton para volver al index de admin-->
             <div class="container">
                 <div class="row justify-content-center">
@@ -150,29 +130,4 @@
                     </div>
                 </div>
             </div>
-
-            <!--modal de confirmacion de bootstrap-->
-            <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-
-                        <div class="modal-header">
-                            Confirmar
-                        </div>
-
-                        <div class="modal-body  text-center">
-                            ¿Está seguro de eliminarlo?
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <a class="btn btn-danger btn-ok" type="submit">Eliminar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--seleccionar el tercer td y guardarlo en una variable para poder borrarlo-->
-            <script></script>
-
-        @endsection
+@endsection

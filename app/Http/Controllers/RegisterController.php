@@ -4,14 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
 
     public function index(Request $request)
     {
-        $users = User::all();
-        return view('users.index', ['users' => $users]);
+        $texto=trim($request->get('texto'));
+
+        $users = DB::table('users')
+            ->select('users.*')
+            ->where('nombre','LIKE','%'.$texto.'%')
+            ->orWhere('apellido','LIKE','%'.$texto.'%')
+            ->orWhere('codigo','LIKE','%'.$texto.'%')
+            ->orWhere('email','LIKE','%'.$texto.'%')
+            ->orWhere('role','LIKE','%'.$texto.'%')
+            ->orderBy('codigo','asc')
+            ->paginate(5);
+
+        return view('users.index',compact('users','texto'));
+
     }
 
     public function create()

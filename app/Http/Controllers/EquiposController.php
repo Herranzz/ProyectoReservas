@@ -5,14 +5,26 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Equipos;
 use App\Models\Tipos;
+use Illuminate\Support\Facades\DB;
 
 class EquiposController extends Controller
 {
     
     public function index(Request $request)
     {
-        $equipos = Equipos::all();
-        return view('equipos.index', ['equipos' => $equipos]);
+        $texto=trim($request->get('texto'));
+
+        $equipos = DB::table('equipos')
+            ->select('equipos.*')
+            ->where('id','LIKE','%'.$texto.'%')
+            ->orWhere('tipo','LIKE','%'.$texto.'%')
+            ->orWhere('marca','LIKE','%'.$texto.'%')
+            ->orWhere('modelo','LIKE','%'.$texto.'%')
+            ->orWhere('numSerie','LIKE','%'.$texto.'%')
+            ->orderBy('id','asc')
+            ->paginate(10);
+
+        return view('equipos.index', compact('equipos','texto'));
     }
 
     public function create()
