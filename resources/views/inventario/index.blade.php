@@ -104,6 +104,10 @@
                                     @endif
                                 </tbody>
                             </table>
+                            <!--paginacion de bootstrap-->
+                            <div class="d-flex justify-content-end">
+                                {{ $inventario->links() }}
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -12,18 +12,19 @@
                     <div class="card-header">{{ __('Profesores') }}</div>
                     <div class="card-body">
                         <div class="table-responsive">
-                                <form action="{{ route('users.index') }}" method="get">
-                                    <div class="form-row">
-                                        <div class="col-sm-2">
-                                            <input type="text" class="form-control" name="texto" value="{{ $texto }}" placeholder="Buscar...">
-                                        </div>
-                                        <div class="col-auto">
-                                            <button type="submit" class="btn btn-info" value="Buscar">
-                                                <i class="fas fa-search"></i>
-                                            </button>
-                                        </div>
+                            <form action="{{ route('users.index') }}" method="get">
+                                <div class="form-row">
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" name="texto"
+                                            value="{{ $texto }}" placeholder="Buscar...">
                                     </div>
-                                </form>
+                                    <div class="col-auto">
+                                        <button type="submit" class="btn btn-info" value="Buscar">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
                             <table class="table table-striped table-hover">
                                 <thead>
                                     <tr>
@@ -53,9 +54,9 @@
                                                     </div>
                                                 </div>
                                                 <!--icono de importar dentro de un boton-->
-                                                        <button class="btn btn-success" type="submit">
-                                                            <i class="fas fa-file-import"></i>
-                                                        </button>
+                                                <button class="btn btn-success" type="submit">
+                                                    <i class="fas fa-file-import"></i>
+                                                </button>
                                                 <!--boton para resetear el archivo que hay en el input-->
                                                 <button type="reset" class="btn btn-dark">
                                                     <i class="fa fa-undo" aria-hidden="true"></i>
@@ -72,7 +73,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if(count($users)<=0)
+                                    @if (count($users) <= 0)
                                         <tr>
                                             <td colspan="5" class="text-center">
                                                 <!--alerta de que no hay datos-->
@@ -82,28 +83,34 @@
                                             </td>
                                         </tr>
                                     @else
-                                    @foreach ($users as $dato)
-                                        <tr>
-                                            <td>{{ $dato->nombre }}</td>
-                                            <td>{{ $dato->apellido }}</td>
-                                            <td>{{ $dato->codigo }}</td>
-                                            <td>{{ $dato->email }}</td>
-                                            <td>{{ $dato->role }}</td>
-                                            <td>
-                                                <a class="btn btn-warning" href="{{ route('users.edit', $dato->codigo) }}">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <!--boton que lanza el modal-->
-                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-{{ $dato->codigo }}">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        @include('users.delete')
-                                    @endforeach
+                                        @foreach ($users as $dato)
+                                            <tr>
+                                                <td>{{ $dato->nombre }}</td>
+                                                <td>{{ $dato->apellido }}</td>
+                                                <td>{{ $dato->codigo }}</td>
+                                                <td>{{ $dato->email }}</td>
+                                                <td>{{ $dato->role }}</td>
+                                                <td>
+                                                    <a class="btn btn-warning"
+                                                        href="{{ route('users.edit', $dato->codigo) }}">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    <!--boton que lanza el modal-->
+                                                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                                                        data-target="#modal-delete-{{ $dato->codigo }}">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            @include('users.delete')
+                                        @endforeach
                                     @endif
                                 </tbody>
                             </table>
+                        </div>
+                        <!--paginacion de bootstrap-->
+                        <div class="d-flex justify-content-end">
+                            {{ $users->links() }}
                         </div>
                     </div>
                 </div>
@@ -130,4 +137,4 @@
                     </div>
                 </div>
             </div>
-@endsection
+        @endsection

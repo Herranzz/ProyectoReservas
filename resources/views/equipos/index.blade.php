@@ -105,6 +105,10 @@
                                     @endif
                                 </tbody>
                             </table>
+                            <!--paginacion de bootstrap-->
+                            <div class="d-flex justify-content-end">
+                                {{ $equipos->links() }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -131,4 +135,4 @@
                     </div>
                 </div>
             </div>
-@endsection
+        @endsection

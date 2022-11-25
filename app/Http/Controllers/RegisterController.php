@@ -11,17 +11,24 @@ class RegisterController extends Controller
 
     public function index(Request $request)
     {
-        $texto=trim($request->get('texto'));
+        $texto = "";
+        
+        if($request->get("texto") != null){
+            $texto = trim($request->get('texto'));
+        }
 
-        $users = DB::table('users')
-            ->select('users.*')
+        $builder = User::orderBy('codigo');
+
+        if($texto) {
+            $builder->select('users.*')
             ->where('nombre','LIKE','%'.$texto.'%')
             ->orWhere('apellido','LIKE','%'.$texto.'%')
             ->orWhere('codigo','LIKE','%'.$texto.'%')
             ->orWhere('email','LIKE','%'.$texto.'%')
-            ->orWhere('role','LIKE','%'.$texto.'%')
-            ->orderBy('codigo','asc')
-            ->paginate(5);
+            ->orWhere('role','LIKE','%'.$texto.'%');
+        }
+
+        $users = $builder->paginate(10);
 
         return view('users.index',compact('users','texto'));
 

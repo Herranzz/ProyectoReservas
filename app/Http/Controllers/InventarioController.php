@@ -13,16 +13,23 @@ class InventarioController extends Controller
 {
     public function index(Request $request)
     {
-        $texto=trim($request->get('texto'));
+        $texto = "";
 
-        $inventario = DB::table('inventario')
-            ->select('inventario.*')
+        if($request->get("texto") != null){
+            $texto = trim($request->get('texto'));
+        }
+
+        $builder = Inventario::orderBy('id');
+
+        if($texto) {
+            $builder->select('inventario.*')
             ->where('id','LIKE','%'.$texto.'%')
             ->orWhere('ubicacion','LIKE','%'.$texto.'%')
             ->orWhere('idEquipo','LIKE','%'.$texto.'%')
-            ->orWhere('estado','LIKE','%'.$texto.'%')
-            ->orderBy('id','asc')
-            ->paginate(10);
+            ->orWhere('estado','LIKE','%'.$texto.'%');
+        }
+
+        $inventario = $builder->paginate(10);
 
         return view('inventario.index', compact('inventario','texto'));
     }
