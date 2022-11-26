@@ -14,7 +14,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                ¿Estás seguro de que quieres eliminar a {{ $dato->nombre . ' ' . $dato->apellido }}?
+                ¿Estás seguro de que quieres eliminar a <mark>{{ $dato->nombre . ' ' . $dato->apellido }}</mark>?<br>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

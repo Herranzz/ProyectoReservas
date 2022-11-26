@@ -127,3 +127,13 @@ Route::put('/admin/gestion/inventario/{id}', [InventarioController::class, 'upda
 
 Route::delete('/admin/gestion/inventario/eliminar/{id}', [InventarioController::class, 'destroy'])->name('inventario.destroy');
 //------------------------------------------------------------
+
+//importar csv---------
+Route::post('/admin/gestion/usuarios/importar', [RegisterController::class, 'import'])->name('users.import');
+Route::post('/admin/gestion/ubicaciones/importar', [UbicacionController::class, 'import'])->name('ubicaciones.import');
+Route::post('/admin/gestion/reservas/importar', [ReservasController::class, 'import'])->name('reservas.import');
+Route::post('/admin/gestion/tipos/importar', [TiposController::class, 'import'])->name('tipos.import');
+Route::post('/admin/gestion/equipos/importar', [EquiposController::class, 'import'])->name('equipos.import');
+Route::post('/admin/gestion/estados/importar', [EstadoController::class, 'import'])->name('estados.import');
+Route::post('/admin/gestion/inventario/importar', [InventarioController::class, 'import'])->name('inventario.import');
+//--------------------

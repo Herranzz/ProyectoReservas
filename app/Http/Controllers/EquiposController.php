@@ -29,7 +29,7 @@ class EquiposController extends Controller
             ->orWhere('numSerie','LIKE','%'.$texto.'%');
         }
 
-        $equipos = $builder->paginate(3);
+        $equipos = $builder->paginate(10);
 
         return view('equipos.index', compact('equipos','texto'));
     }
@@ -73,11 +73,11 @@ class EquiposController extends Controller
 
     public function update(Request $request)
     {
-        $request->validate([
+        /*$request->validate([
             'numSerie' => 'unique:equipos'
         ], [
             'numSerie.unique' => 'El número de serie ya existe'
-    ]);
+    ]);*/
 
         $equipo = Equipos::findOrFail($request->id);
         $equipo->tipo = $request->tipo;
@@ -96,5 +96,27 @@ class EquiposController extends Controller
         $equipo = Equipos::findOrFail($request->id);
         $equipo->delete();
         return redirect()->to('/admin/gestion/equipos')->with('message', 'Equipo eliminado correctamente');
+    }
+
+    //funcion import csv
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:csv,txt'
+        ]);
+
+        $file = fopen($request->file, 'r');
+
+        while (($column = fgetcsv($file, 10000, ";")) !== FALSE) {
+            $equipo = new Equipos();
+            $equipo->tipo = $column[0];
+            $equipo->marca = $column[1];
+            $equipo->modelo = $column[2];
+            $equipo->numSerie = $column[3];
+
+            $equipo->save();
+        }
+
+        return redirect()->to('/admin/gestion/equipos')->with('message', 'Equipos importados correctamente');
     }
 }

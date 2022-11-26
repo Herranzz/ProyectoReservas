@@ -45,7 +45,7 @@
                                             </form>
                                         </th>
                                         <!--campo para argregar un archivo csv-->
-                                        <form method="post" action="#" enctype="multipart/form-data">
+                                        <form method="post" action="{{ route('users.import') }}" enctype="multipart/form-data">
                                             @csrf
                                             <div class="form-group row" style="width: 80%;">
                                                 <div class="col-md-6 offset-md-4">
@@ -69,7 +69,6 @@
                                         <th scope="col">Apellido</th>
                                         <th scope="col">Código</th>
                                         <th scope="col">Email</th>
-                                        <th scope="col">Role</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -89,7 +88,6 @@
                                                 <td>{{ $dato->apellido }}</td>
                                                 <td>{{ $dato->codigo }}</td>
                                                 <td>{{ $dato->email }}</td>
-                                                <td>{{ $dato->role }}</td>
                                                 <td>
                                                     <a class="btn btn-warning"
                                                         href="{{ route('users.edit', $dato->codigo) }}">

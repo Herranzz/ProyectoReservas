@@ -28,7 +28,7 @@ class RegisterController extends Controller
             ->orWhere('role','LIKE','%'.$texto.'%');
         }
 
-        $users = $builder->paginate(10);
+        $users = $builder->paginate(5);
 
         return view('users.index',compact('users','texto'));
 
@@ -40,7 +40,6 @@ class RegisterController extends Controller
     }
 
     public function store(Request $request) {
-
         //validar que el codigo y el email no se repita
         $request->validate([
             'codigo' => 'unique:users',
@@ -92,4 +91,25 @@ class RegisterController extends Controller
     }
 
     //funcion import csv
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:csv,txt'
+        ]);
+
+        $file = fopen($request->file, 'r');
+
+        while (($column = fgetcsv($file, 10000, ";")) !== FALSE) {
+            $user = new User();
+            $user->nombre = $column[0];
+            $user->apellido = $column[1];
+            $user->codigo = $column[2];
+            $user->email = $column[3];
+            $user->password = $column[4];
+            $user->role = $column[5];
+            $user->save();
+        }
+
+        return redirect()->to('/admin/gestion/usuarios')->with('message', 'Profesores importados correctamente');
+    }
 }

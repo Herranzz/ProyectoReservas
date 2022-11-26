@@ -44,7 +44,7 @@
                                             </form>
                                         </th>
                                         <!--campo para argregar un archivo csv-->
-                                        <form method="post" action="#" enctype="multipart/form-data">
+                                        <form method="post" action="{{ route('equipos.import') }}" enctype="multipart/form-data">
                                             @csrf
                                             <div class="form-group row" style="width: 80%;">
                                                 <div class="col-md-6 offset-md-4">
@@ -68,7 +68,6 @@
                                         <th scope="col">Marca</th>
                                         <th scope="col">Modelo</th>
                                         <th scope="col">Nº de Serie</th>
-                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
