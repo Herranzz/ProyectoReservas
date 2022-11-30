@@ -20,8 +20,9 @@
                             <div class="col-md-6">
                                 <select id="tipo" type="text" class="form-control " name="tipo" value="{{ old('tipo') }}"
                                     required autocomplete="tipo" autofocus>
-                                    @foreach ($tipos as $tipo)
-                                    <option value="{{ $tipo->tipo }}">{{ $tipo->tipo }}</option>
+                                    <option hidden selected>{{ $equipo->tipo }}</option>
+                                    @foreach ($tipos as $dato)
+                                    <option value="{{ $dato->tipo }}">{{ $dato->tipo }}</option>
                                     @endforeach
                                 </select>
                             </div>

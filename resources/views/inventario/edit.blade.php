@@ -18,7 +18,8 @@
                             <label for="ubicacion" class="col-md-4 col-form-label text-md-right">{{ __('Ubicación') }}</label>
                             <div class="col-md-6">
                                 <select id="ubicacion" type="text" class="form-control " name="ubicacion"
-                                    value="{{ old('ubicacion') }}" required autocomplete="ubicacion" autofocus>
+                                    value="{{ $inventario->ubicacion }}" required autocomplete="ubicacion" selected>
+                                    <option hidden selected>{{ $inventario->ubicacion }}</option>
                                     @foreach ($ubicacion as $dato)
                                         <option value="{{ $dato->aula }}">{{ $dato->aula }}</option>
                                     @endforeach
@@ -32,7 +33,7 @@
                             <div class="col-md-6">
                                 <select id="idEquipo" type="text" class="form-control " name="idEquipo"
                                     value="{{ $inventario->idEquipo }}" required autocomplete="idEquipo" autofocus>
-                                    <option selected>{{ $inventario->idEquipo }}</option>
+                                    <option hidden selected>{{ $inventario->idEquipo }}</option>
                                     @foreach ($equipo as $dato)
                                         <option value="{{ $dato->id }}">{{ $dato->id }}</option>
                                     @endforeach
@@ -47,7 +48,6 @@
                             <div class="col-md-6">
                                 <input id="descripcion" type="text" class="form-control " name="descripcion"
                                     value="{{ $inventario->descripcion }}" autocomplete="descripcion" autofocus>
-
                                 @error('descripcion')
                                     <div class="alert alert-danger" role="alert"> {{ $message }} </div>
                                 @enderror
@@ -59,6 +59,7 @@
                             <div class="col-md-6">
                                 <select id="estado" type="text" class="form-control " name="estado" value="{{ old('estado') }}"
                                     required autocomplete="estado" autofocus>
+                                    <option hidden selected>{{ $inventario->estado }}</option>
                                     @foreach ($estado as $dato)
                                     <option value="{{ $dato->estado }}">{{ $dato->estado }}</option>
                                     @endforeach

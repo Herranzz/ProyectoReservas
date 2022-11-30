@@ -12,11 +12,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'nombre',
         'apellido',
@@ -47,6 +42,8 @@ class User extends Authenticatable
 
     //para que no de problemas, porque entiende que la primaryKey es un id y como no es un id nunca lo encuentra
     protected $primaryKey = 'codigo';
+
+    public $incrementing = false;
 
     public function setPasswordAttribute($password) {
         $this->attributes['password'] = bcrypt($password);
