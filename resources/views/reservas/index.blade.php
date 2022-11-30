@@ -3,27 +3,27 @@
 @section('template_title', 'Reservas')
 
 @section('content')
-<script>
 
-    document.addEventListener('DOMContentLoaded', function() {
-      var calendarEl = document.getElementById('calendar');
+<div id='calendar'></div>
 
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-        plugins: [ 'dayGrid' ]
-      });
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h4>Edit Appointment</h4>
 
-      calendar.render();
-    });
+                Start time:
+                <br />
+                <input type="text" class="form-control" name="start_time" id="start_time">
 
-</script>
+                End time:
+                <br />
+                <input type="text" class="form-control" name="finish_time" id="finish_time">
+            </div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-body ">
-                    <div id='calendar'></div>
-                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <input type="button" class="btn btn-primary" id="appointment_update" value="Save">
             </div>
         </div>
     </div>

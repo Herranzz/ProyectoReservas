@@ -10,7 +10,7 @@ class ReservasController extends Controller
     public function index()
     {
         $reservas = Reservas::all();
-        return view('fullcalender.index', compact('reservas'));
+        return view('reservas.index', compact('reservas'));
     }
 
     public function create()
@@ -23,7 +23,6 @@ class ReservasController extends Controller
         $reserva = new Reservas();
         $reserva->codigoProfesor = $request->codigoProfesor;
         $reserva->idEquipo = $request->idEquipo;
-        $reserva->ubicacion = $request->ubicacion;
         $reserva->horaInicio = $request->horaInicio;
         $reserva->horaFin = $request->horaFin;
         $reserva->fechaReserva = $request->fechaReserva;
@@ -37,12 +36,11 @@ class ReservasController extends Controller
         return view('reservas.edit', compact('reserva'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $reserva = Reservas::find($id);
+        $reserva = Reservas::findOrFail($request->id);
         $reserva->codigoProfesor = $request->codigoProfesor;
         $reserva->idEquipo = $request->idEquipo;
-        $reserva->ubicacion = $request->ubicacion;
         $reserva->horaInicio = $request->horaInicio;
         $reserva->horaFin = $request->horaFin;
         $reserva->fechaReserva = $request->fechaReserva;

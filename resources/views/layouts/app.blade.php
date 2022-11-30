@@ -20,7 +20,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
 
         <!--Full Calendar cdn core/main.js y daygrid/main.js de nodemodules-->
-        
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css' />
         
 
     </head>
@@ -64,6 +64,34 @@
             </div>
           </footer>
 
+          <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
+          <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
+          <script>
+              $(document).ready(function() {
+                  // page is now ready, initialize the calendar...
+                  $('#calendar').fullCalendar({
+                      // put your options and callbacks here
+                      defaultView: 'agendaWeek',
+                      header: {
+                          left: 'prev,next today',
+                          center: 'title',
+                          right: 'month,agendaWeek,agendaDay'
+                      },
+                      events: [
+                          {
+                              title: 'All Day Event',
+                              start: '2021-06-01'
+                          },
+                          {
+                              title: 'Long Event',
+                              start: '2021-06-07',
+                              end: '2021-06-10'
+                          },
+                        ]
+                  });
+              });
+          </script>
+          
           <script type="text/javascript" src="./js/app.js"></script>
     </body>
 </html>

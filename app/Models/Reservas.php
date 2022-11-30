@@ -11,7 +11,14 @@ class Reservas extends Model
 
     protected $table = 'reservas';
 
+    public $timestamps = false;
+
     protected $fillable = [
-        'start',
+        'id',
+        'codigoProfesor',
+        'idEquipo',
+        'horaInicio',
+        'horaFin',
+        'fechaReserva'
     ];
 }

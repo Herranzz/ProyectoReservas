@@ -53,7 +53,6 @@ create table if not exists reservas(
     horaInicio time not null,
     horaFin time not null,
     fechaReserva date not null,
-    created_at timestamp,
         FOREIGN KEY (codigoProfesor) REFERENCES users(codigo) on update cascade on delete cascade,
         FOREIGN KEY (idEquipo) REFERENCES equipos(id)
 );
