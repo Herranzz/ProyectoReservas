@@ -66,31 +66,8 @@
 
           <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
           <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
-          <script>
-              $(document).ready(function() {
-                  // page is now ready, initialize the calendar...
-                  $('#calendar').fullCalendar({
-                      // put your options and callbacks here
-                      defaultView: 'agendaWeek',
-                      header: {
-                          left: 'prev,next today',
-                          center: 'title',
-                          right: 'month,agendaWeek,agendaDay'
-                      },
-                      events: [
-                          {
-                              title: 'All Day Event',
-                              start: '2021-06-01'
-                          },
-                          {
-                              title: 'Long Event',
-                              start: '2021-06-07',
-                              end: '2021-06-10'
-                          },
-                        ]
-                  });
-              });
-          </script>
+          <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/locale/es.js'></script>
+          
           
           <script type="text/javascript" src="./js/app.js"></script>
     </body>

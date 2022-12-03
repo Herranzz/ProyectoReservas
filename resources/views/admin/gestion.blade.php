@@ -92,7 +92,7 @@
                         style="height: 62%;" class="card-img-top" alt="...">
                     <div class="card-body" style="height: 33%; background-color: #a6daf7;">
                         <h5 class="card-title ">Reservas</h5>
-                        <a href="{{ route('reservas.index') }}" class="btn btn-warning">
+                        <a href="{{ route('reservasAdmin.index') }}" class="btn btn-warning">
                             <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>

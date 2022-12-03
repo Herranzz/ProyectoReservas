@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Reservas;
+use App\Models\Equipos;
+use App\Models\User;
+use App\Models\Inventario;
 
 class ReservasController extends Controller
 {
@@ -15,7 +18,13 @@ class ReservasController extends Controller
 
     public function create()
     {
-        return view('reservas.create');
+        
+
+        $reserva = new Reservas();
+        $equipos = Equipos::all();
+        $users = User::all();
+        $inventarios = Inventario::all();
+        return view('reservas.create', compact('reserva', 'equipos', 'users'));
     }
 
     public function store(Request $request)
@@ -26,14 +35,18 @@ class ReservasController extends Controller
         $reserva->horaInicio = $request->horaInicio;
         $reserva->horaFin = $request->horaFin;
         $reserva->fechaReserva = $request->fechaReserva;
+
         $reserva->save();
-        return redirect()->route('reservas.index');
+
+        return redirect()->to('/admin/gestion/reservas')->with('message', 'Reservado con éxito');
     }
 
     public function edit($id)
     {
-        $reserva = Reservas::find($id);
-        return view('reservas.edit', compact('reserva'));
+        $reserva = Reservas::findOrFail($id);
+        $equipos = Equipos::all();
+        $users = User::all();
+        return view('reservas.edit', compact('reserva', 'equipos', 'users'));
     }
 
     public function update(Request $request)
@@ -45,13 +58,14 @@ class ReservasController extends Controller
         $reserva->horaFin = $request->horaFin;
         $reserva->fechaReserva = $request->fechaReserva;
         $reserva->save();
-        return redirect()->route('reservas.index');
+        
+        return redirect()->to('/admin/gestion/reservas')->with('message', 'Reserva actualizada correctamente');
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $reserva = Reservas::find($id);
+        $reserva = Reservas::findOrFail($request->id);
         $reserva->delete();
-        return redirect()->route('reservas.index');
+        return redirect()->to('/admin/gestion/reservas')->with('message', 'Reserva eliminada correctamente');
     }
 }

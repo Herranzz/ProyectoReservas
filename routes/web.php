@@ -6,6 +6,7 @@ use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UbicacionController;
 use App\Http\Controllers\ReservasController;
+use App\Http\Controllers\ReservasAdminController;
 use App\Http\Controllers\EquiposController;
 use App\Http\Controllers\TiposController;
 use App\Http\Controllers\EstadoController;
@@ -57,19 +58,22 @@ Route::delete('/admin/gestion/ubicaciones/eliminar/{id}', [UbicacionController::
 //------------------------------------------------------------
 
 //crud reservas------------------------------------------------------------
-Route::get('/admin/gestion/reservas', [ReservasController::class, 'index'])->middleware('auth.admin')->name('reservas.index');
+Route::get('/admin/gestion/reservas', [ReservasAdminController::class, 'index'])->middleware('auth.admin')->name('reservasAdmin.index');
 
-Route::get('/admin/gestion/reservas/crear', [ReservasController::class, 'create'])->middleware('auth.admin')->name('reservas.create');
+//reservas de usuario
+Route::get('/reservas', [ReservasController::class, 'index'])->middleware('auth')->name('reservas.index');
 
-Route::post('/admin/gestion/reservas/crear', [ReservasController::class, 'store'])->name('reservas.store');
+Route::get('reservas/crear', [ReservasController::class, 'create'])->name('reservas.create');
 
-Route::get('/admin/gestion/reservas/actualizar/{id}', [ReservasController::class, 'edit'])->name('reservas.edit');
+Route::post('/reservas/crear', [ReservasController::class, 'store'])->name('reservas.store');
 
-Route::put('/admin/gestion/reservas/{id}', [ReservasController::class, 'update'])->name('reservas.update');
+Route::get('/reservas/actualizar/{id}', [ReservasController::class, 'edit'])->name('reservas.edit');
 
-Route::delete('/admin/gestion/reservas/eliminar/{id}', [ReservasController::class, 'destroy'])->name('reservas.destroy');
+Route::put('/reservas/{id}', [ReservasController::class, 'update'])->name('reservas.update');
 
-Route::get('/admin/gestion/reservas/ver/{id}', [ReservasController::class, 'show'])->name('reservas.show');
+Route::delete('/reservas/eliminar/{id}', [ReservasController::class, 'destroy'])->name('reservas.destroy');
+
+Route::get('/reservas/ver/{id}', [ReservasController::class, 'show'])->name('reservas.show');
 //------------------------------------------------------------
 
 //crud tipos de equipos------------------------------------------------------------
