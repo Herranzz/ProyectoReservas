@@ -19,6 +19,7 @@ class Reservas extends Model
         'idEquipo',
         'horaInicio',
         'horaFin',
+        'color',
         'fechaReserva'
     ];
 }

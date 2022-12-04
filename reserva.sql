@@ -50,9 +50,14 @@ create table if not exists reservas(
     id int not null auto_increment primary key,
     codigoProfesor varchar(10) not null,
     idEquipo int not null,
-    horaInicio time not null,
-    horaFin time not null,
+    horaInicio datetime not null,
+    horaFin datetime not null,
+    color varchar(50) not null,
     fechaReserva date not null,
         FOREIGN KEY (codigoProfesor) REFERENCES users(codigo) on update cascade on delete cascade,
         FOREIGN KEY (idEquipo) REFERENCES equipos(id)
 );
+
+create trigger updateEstado after insert on reservas
+for each row
+    update inventario set estado = "ocupado" where idEquipo = new.idEquipo;

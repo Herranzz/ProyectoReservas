@@ -4,7 +4,16 @@
 
 @section('content')
 
-    <div id='calendar'></div>
+    <div class="container">
+        <!--boton agregar reserva-->
+        <div class="row">
+            <div class="col-12">
+                <a href="{{ route('reservas.create') }}" class="btn btn-success">Agregar Reserva</a>
+            </div>
+        </div>
+    </div>
+
+    <div id='calendar' onclick=""></div>
 
     <!-- Modal -->
     <div class="modal fade" id="reserva" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
@@ -17,27 +26,38 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    
+
                     <form action="">
 
                         <div class="form-group">
                             <label for="codigoProfesor">Código Profesor</label>
                             <!--el input tiene que aparecer el codigo del profesor de la sesion-->
-                            <input type="text" class="form-control" name="codigoProfesor" id="codigoProfesor" placeholder="" required>
+                            <input type="text" class="form-control" name="codigoProfesor" id="codigoProfesor"
+                                placeholder="" required>
                         </div>
 
                         <div class="form-group">
                             <label for="horaInicio">Hora Inicio</label>
-                            <input type="time" class="form-control" name="horaInicio" id="horaInicio" aria-describedby="helpId" placeholder="" required>
-                            
+                            <input type="time" class="form-control" name="horaInicio" id="horaInicio"
+                                aria-describedby="helpId" placeholder="" required>
+
                             <label for="horaInicio">Hora Fin</label>
-                            <input type="time" class="form-control" name="horaFin" id="horaFin" aria-describedby="helpId" placeholder="" required>
+                            <input type="time" class="form-control" name="horaFin" id="horaFin"
+                                aria-describedby="helpId" placeholder="" required>
                             <br>
                             <label for="fechaReserva">Fecha de Reserva</label>
-                            <input type="datetime" class="form-control" name="fechaReserva"  required value="<?php echo date("Y-m-d");?>">
+                            <input type="datetime" class="form-control" name="fechaReserva" required
+                                value="<?php echo date('Y-m-d'); ?>">
                         </div>
-                            
-                        
+
+                        <div class="form-group">
+                            <label for="tiposEquipos">Tipos de Equipos</label>
+                            <select id="tipo" type="text" class="form-control " name="tipo"
+                                value="{{ old('tipo') }}" required autocomplete="tipo" autofocus>
+
+                            </select>
+                        </div>
+
                     </form>
 
                 </div>
@@ -56,30 +76,54 @@
             $('#calendar').fullCalendar({
                 // put your options and callbacks here
                 locale: 'es',
-                defaultView: 'agendaWeek',
+                defaultView: 'month',
 
                 header: {
                     left: 'prev,next today',
                     center: 'title',
                     right: 'month,agendaWeek,agendaDay'
                 },
+                
+                //mostrar las reservas del usuario
+                events: [
+                    @foreach($reservas as $reserva)
+                    {
+                        title: '{{$reserva->codigoProfesor}}',
+                        start: '{{$reserva->horaInicio}}',
+                        end: '{{$reserva->horaFin}}',
+                        color: '{{$reserva->color}}',
+                        textColor: 'white',
+                        id: '{{$reserva->id}}',
+                    },
+                    @endforeach
+                ],
 
-                //al pulsar una celda del calendario sacar el modal
+                //al pulsar una celda del calendario que lleve a crear una reserva
                 dayClick: function(date, jsEvent, view) {
-                    $('#reserva').modal('show');
+                    formulario.action = "{{ route('reservas.create') }}";
                 },
             });
 
-            document.getElementById("btnGuardar").addEventListener("click", function(){
+
+            /*document.getElementById("btnGuardar").addEventListener("click", function() {
                 let horaInicio = document.getElementById("horaInicio").value;
                 let horaFin = document.getElementById("horaFin").value;
                 if (horaInicio > horaFin) {
                     alert("La hora de inicio no puede ser mayor que la hora de fin");
                 } else {
-                    $('#reserva').modal('hide');
-                    console.log(formulario.horaInicio.value);
+                    axios.post("http://localhost/ProyectoFinal/public/reservas/crear", datos).then(
+                        (respuesta) => {
+                            $("#reserva").modal("hide");
+                        }
+                    ).catch(
+                        (error) => {
+                            if (error.response) {
+                                console.log(error.response.data);
+                            }
+                        }
+                    );
                 }
-            });
+            });*/
         });
     </script>
 

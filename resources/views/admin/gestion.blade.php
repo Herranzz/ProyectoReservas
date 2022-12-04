@@ -62,7 +62,7 @@
             </div>
             <div class="col-sm-4">
                 <div class="card" style="width: 18rem; height: 100%;">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ40h3bQY2oGNr0quqLHrhWB_RbH02SyTor-w&usqp=CAU"
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlnZaHH1deXbEcb0c8l-rVbuCRL1obvnxLGQ&usqp=CAU"
                         style="height: 62%;" class="card-img-top" alt="...">
                     <div class="card-body" style="height: 33%; background-color: #a6b1f7;">
                         <h5 class="card-title ">Inventario de Equipos</h5>
@@ -88,7 +88,7 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="card" style="width: 18rem; height: 100%;">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ40h3bQY2oGNr0quqLHrhWB_RbH02SyTor-w&usqp=CAU"
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdgYS2MumgyaCTKzy3dThpeclqi-z5voUkrg&usqp=CAU"
                         style="height: 62%;" class="card-img-top" alt="...">
                     <div class="card-body" style="height: 33%; background-color: #a6daf7;">
                         <h5 class="card-title ">Reservas</h5>

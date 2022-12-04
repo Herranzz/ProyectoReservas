@@ -63,7 +63,7 @@ Route::get('/admin/gestion/reservas', [ReservasAdminController::class, 'index'])
 //reservas de usuario
 Route::get('/reservas', [ReservasController::class, 'index'])->middleware('auth')->name('reservas.index');
 
-Route::get('reservas/crear', [ReservasController::class, 'create'])->name('reservas.create');
+Route::get('/reservas/crear', [ReservasController::class, 'create'])->name('reservas.create');
 
 Route::post('/reservas/crear', [ReservasController::class, 'store'])->name('reservas.store');
 
@@ -73,7 +73,7 @@ Route::put('/reservas/{id}', [ReservasController::class, 'update'])->name('reser
 
 Route::delete('/reservas/eliminar/{id}', [ReservasController::class, 'destroy'])->name('reservas.destroy');
 
-Route::get('/reservas/ver/{id}', [ReservasController::class, 'show'])->name('reservas.show');
+Route::get('/reservas/ver/{id}', [ReservasController::class, 'show']);
 //------------------------------------------------------------
 
 //crud tipos de equipos------------------------------------------------------------
