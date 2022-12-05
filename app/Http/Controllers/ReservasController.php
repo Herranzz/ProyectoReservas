@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Reservas;
 use App\Models\Tipos;
-use App\Models\Equipos;
 use App\Models\User;
 use App\Models\Inventario;
 
@@ -56,22 +55,19 @@ class ReservasController extends Controller
 
         $reserva = new Reservas();
 
-        $equipos = Equipos::all();
         $users = User::all();
         $inventario = Inventario::all();
         $tipos = Tipos::all();
-        return view('reservas.create', compact('reserva', 'equipos', 'users', 'inventario', 'tipos', 'portatiles', 'sobremesas', 'tablets'));
+        return view('reservas.create', compact('reserva', 'users', 'inventario', 'tipos', 'portatiles', 'sobremesas', 'tablets'));
     }
 
     public function store(Request $request)
     {
         $reserva = new Reservas();
         $reserva->codigoProfesor = $request->codigoProfesor;
-        $reserva->idEquipo = $request->idEquipo;
+        $reserva->numEquipos = $request->numEquipos;
         $reserva->horaInicio = $request->horaInicio;
-        $reserva->horaFin = $request->horaFin;
         $reserva->color = $request->color;
-        $reserva->fechaReserva = $request->fechaReserva;
 
         $reserva->save();
 
@@ -81,20 +77,18 @@ class ReservasController extends Controller
     public function edit($id)
     {
         $reserva = Reservas::findOrFail($id);
-        $equipos = Equipos::all();
         $users = User::all();
-        return view('reservas.edit', compact('reserva', 'equipos', 'users'));
+        return view('reservas.edit', compact('reserva', 'users'));
     }
 
     public function update(Request $request)
     {
         $reserva = Reservas::findOrFail($request->id);
         $reserva->codigoProfesor = $request->codigoProfesor;
-        $reserva->idEquipo = $request->idEquipo;
+        $reserva->numEquipos = $request->numEquipos;
         $reserva->horaInicio = $request->horaInicio;
-        $reserva->horaFin = $request->horaFin;
         $reserva->color = $request->color;
-        $reserva->fechaReserva = $request->fechaReserva;
+
         $reserva->save();
         
         return redirect()->to('/admin/gestion/reservas')->with('message', 'Reserva actualizada correctamente');

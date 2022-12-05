@@ -29,10 +29,8 @@
                                     </tr>
                                     <tr>
                                         <th scope="col">Código Profesor</th>
-                                        <th scope="col">IdEquipo</th>
-                                        <th scope="col">Hora Inicio</th>
-                                        <th scope="col">Hora Fin</th>
-                                        <th scope="col">Fecha Reserva</th>
+                                        <th scope="col">Nº Equipos</th>
+                                        <th scope="col">Fecha y Hora de Reserva</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -51,8 +49,6 @@
                                                 <td>{{ $dato->codigoProfesor }}</td>
                                                 <td>{{ $dato->idEquipo }}</td>
                                                 <td>{{ $dato->horaInicio }}</td>
-                                                <td>{{ $dato->horaFin }}</td>
-                                                <td>{{ $dato->fechaReserva }}</td>
                                             </tr>
                                         @endforeach
                                     @endif

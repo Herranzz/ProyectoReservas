@@ -88,25 +88,18 @@
                 events: [
                     @foreach($reservas as $reserva)
                     {
-                        title: '{{$reserva->codigoProfesor}}',
+                        title: '{{$reserva->codigoProfesor}} {{$reserva->horaInicio}}',
                         start: '{{$reserva->horaInicio}}',
-                        end: '{{$reserva->horaFin}}',
+                        end: '{{$reserva->horaInicio}}',
                         color: '{{$reserva->color}}',
                         textColor: 'white',
                         id: '{{$reserva->id}}',
                     },
                     @endforeach
-                    {
-                        title: "peeppepe",
-                        start: "2022-12-10 18:00:00",
-                        end: "2022-12-10 23:00:00",
-                        color: "blue",
-                    }
                 ],
 
                 //evento que al hacer click en el calendario, vaya a la vista reservas.create y pinte la fecha en el input horaInicio
                 dayClick: function(date, jsEvent, view) {
-                    alert('Clicked on: ' + date.format());
                     //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
                     //alert('Current view: ' + view.name);
                     // change the day's background color just for fun
@@ -120,26 +113,6 @@
 
             });
 
-
-            /*document.getElementById("btnGuardar").addEventListener("click", function() {
-                let horaInicio = document.getElementById("horaInicio").value;
-                let horaFin = document.getElementById("horaFin").value;
-                if (horaInicio > horaFin) {
-                    alert("La hora de inicio no puede ser mayor que la hora de fin");
-                } else {
-                    axios.post("http://localhost/ProyectoFinal/public/reservas/crear", datos).then(
-                        (respuesta) => {
-                            $("#reserva").modal("hide");
-                        }
-                    ).catch(
-                        (error) => {
-                            if (error.response) {
-                                console.log(error.response.data);
-                            }
-                        }
-                    );
-                }
-            });*/
         });
     </script>
 

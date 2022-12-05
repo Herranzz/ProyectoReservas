@@ -16,10 +16,8 @@ class Reservas extends Model
     protected $fillable = [
         'id',
         'codigoProfesor',
-        'idEquipo',
+        'numEquipos',
         'horaInicio',
-        'horaFin',
         'color',
-        'fechaReserva'
     ];
 }

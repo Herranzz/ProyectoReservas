@@ -18,7 +18,6 @@
             </div>
             <div class="col-sm-4">
                 <div class="card" style="width: 18rem;">
-                    <img src="https://www.iesriberadecastilla.com/wp-content/uploads/2019/09/Logo-IES-Ribera-de-Castilla-1.png" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title ">Coming Soon...</h5>
                         <p class="card-text">Coming Soon...</p>
@@ -28,7 +27,6 @@
             </div>
             <div class="col-sm-4">
                 <div class="card" style="width: 18rem;">
-                    <img src="https://www.iesriberadecastilla.com/wp-content/uploads/2019/09/Logo-IES-Ribera-de-Castilla-1.png" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">Coming Soon...</h5>
                         <p class="card-text">Coming Soon...</p>
