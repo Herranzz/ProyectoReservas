@@ -49,7 +49,7 @@ create table if not exists inventario(
 create table if not exists reservas(
     id int not null auto_increment primary key,
     codigoProfesor varchar(10) not null,
-    idEquipo int not null,
+    numEquipos int(50) not null,
     horaInicio datetime not null,
     horaFin datetime not null,
     color varchar(50) not null,

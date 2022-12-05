@@ -21,13 +21,6 @@
 
                             </div>
 
-                            <!--seelct con los equipos libres-->
-                            <div class="form-group row">
-                                <label for="idEquipo">Equipos</label>
-                                <input type="text" class="form-control" name="idEquipo" id="idEquipo"
-                                    placeholder="" required>
-                            </div>
-
                             <!--traer los tipos de la tabla externa tipos y pintarlo en un options-->
                             <div class="form-group row">
                                 <label for="tipo"
@@ -44,20 +37,6 @@
                                         class="col-md-4 col-form-label text-md-right">{{ __('Numero de portatiles') }}</label>
                                     <select id="numeroPortatiles" name="numeroPortatiles">
                                         <!--meter la siguiente consulta sql en el option: select count(*) from inventario where estado = 'libre' and idEquipo in (select id from equipos where tipo = 'portatil');-->
-                                        <?php
-                                        $portatiles = DB::table('inventario')
-                                            ->where('estado', '=', 'libre')
-                                            ->where('idEquipo', 'in', function ($query) {
-                                                $query
-                                                    ->select('id')
-                                                    ->from('equipos')
-                                                    ->where('tipo', 'portatil');
-                                            })
-                                            ->count();
-                                        
-                                        ?>
-
-                                            <option value="{{ $portatiles }}">{{ $portatiles }}</option>
                                         
                                     </select>
 

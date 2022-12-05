@@ -96,12 +96,28 @@
                         id: '{{$reserva->id}}',
                     },
                     @endforeach
+                    {
+                        title: "peeppepe",
+                        start: "2022-12-10 18:00:00",
+                        end: "2022-12-10 23:00:00",
+                        color: "blue",
+                    }
                 ],
 
-                //al pulsar una celda del calendario que lleve a crear una reserva
+                //evento que al hacer click en el calendario, vaya a la vista reservas.create y pinte la fecha en el input horaInicio
                 dayClick: function(date, jsEvent, view) {
-                    formulario.action = "{{ route('reservas.create') }}";
+                    alert('Clicked on: ' + date.format());
+                    //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+                    //alert('Current view: ' + view.name);
+                    // change the day's background color just for fun
+                    //$(this).css('background-color', 'red');
+                    window.location.href = "{{ route('reservas.create') }}";
+                    $('#horaInicio').val(date.format());
+                    //$('#horaFin').val(date.format());
+                    //$('#fechaReserva').val(date.format());
                 },
+
+
             });
 
 

@@ -67,6 +67,10 @@
           <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
           <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
           <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/locale/es.js'></script>
+          <!--cdn interaction-->
+          <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/gcal.js'></script>
+          <!--cdn interaction-->
+          <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.1.0/interaction/main.js'></script>
           
           
           <script type="text/javascript" src="./js/app.js"></script>
