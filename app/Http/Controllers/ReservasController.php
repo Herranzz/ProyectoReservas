@@ -7,64 +7,46 @@ use App\Models\Reservas;
 use App\Models\Tipos;
 use App\Models\User;
 use App\Models\Inventario;
+use Illuminate\Support\Facades\DB;
 
 class ReservasController extends Controller
 {
     public function index()
     {
-        //mostrar las reservas del usuario de la sesion
+        //mostrar todas las reservas del usuario de la sesion una vez cargue la vista
         $reservas = Reservas::where('codigoProfesor', auth()->user()->codigo)->get();
         return view('reservas.index', compact('reservas'));
     }
 
     public function create()
     {
-        //obtener mediante una consulta el numero de portatiles libres
-        $portatiles = Inventario::orderBy('id');
-
         //select count(*) from inventario where estado = 'libre' and idEquipo in (select id from equipos where tipo = 'portatil');
-
-        $portatiles->where('estado', 'libre')->where('idEquipo', 'in', function($query) {
-            $query->select('id')->from('equipos')->where('tipo', 'portatil');
-        })->count();
-        
-
-        //obtener mediante una consulta el numero de sobremesa libres
-        $builder2 = Inventario::orderBy('id');
-
-        $builder2->select('inventario.*')
-        ->join('equipos', 'inventario.idEquipo', '=', 'equipos.id')
-        ->join('tipos', 'equipos.tipo', '=', 'tipos.id')
-        ->where('tipos.tipo', '=', 'Sobremesa')
-        ->where('inventario.estado', '=', 'Libre')
-        ->count();
-
-        $sobremesas = $builder2->get();
-
-        //obtener mediante una consulta el numero de tablets libres
-        $builder3 = Inventario::orderBy('id');
-
-        $builder3->select('inventario.*')
-        ->join('equipos', 'inventario.idEquipo', '=', 'equipos.id')
-        ->join('tipos', 'equipos.tipo', '=', 'tipos.id')
-        ->where('tipos.tipo', '=', 'Tablet')
-        ->where('inventario.estado', '=', 'Libre')
-        ->count();
-
-        $tablets = $builder3->get();
+        $portatiles = DB::table('inventario')
+            ->where('estado', 'libre')
+            ->where('idEquipo', DB::table('equipos')->where('tipo', 'portatil')->value('id'))
+            ->count();
+        $sobremesa = DB::table('inventario')
+            ->where('estado', 'libre')
+            ->where('idEquipo', DB::table('equipos')->where('tipo', 'sobremesa')->value('id'))
+            ->count();
+        $tablets = DB::table('inventario')
+            ->where('estado', 'libre')
+            ->where('idEquipo', DB::table('equipos')->where('tipo', 'tablet')->value('id'))
+            ->count();  
 
         $reserva = new Reservas();
 
         $users = User::all();
         $inventario = Inventario::all();
         $tipos = Tipos::all();
-        return view('reservas.create', compact('reserva', 'users', 'inventario', 'tipos', 'portatiles', 'sobremesas', 'tablets'));
+        return view('reservas.create', compact('reserva', 'users', 'inventario', 'tipos', 'portatiles', 'sobremesa', 'tablets'));
     }
 
     public function store(Request $request)
     {
         $reserva = new Reservas();
         $reserva->codigoProfesor = $request->codigoProfesor;
+        $reserva->tipoEquipos = $request->tipoEquipos;
         $reserva->numEquipos = $request->numEquipos;
         $reserva->horaInicio = $request->horaInicio;
         $reserva->color = $request->color;
@@ -85,6 +67,7 @@ class ReservasController extends Controller
     {
         $reserva = Reservas::findOrFail($request->id);
         $reserva->codigoProfesor = $request->codigoProfesor;
+        $reserva->tipoEquipos = $request->tipoEquipos;
         $reserva->numEquipos = $request->numEquipos;
         $reserva->horaInicio = $request->horaInicio;
         $reserva->color = $request->color;

@@ -16,6 +16,7 @@ class Reservas extends Model
     protected $fillable = [
         'id',
         'codigoProfesor',
+        'tipoEquipos',
         'numEquipos',
         'horaInicio',
         'color',

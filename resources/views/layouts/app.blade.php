@@ -6,6 +6,8 @@
         
         <title>@yield('title') - Reserva Equipos</title>
 
+        <!--Favicon-->
+        <link rel="icon" href="https://pbs.twimg.com/media/FgAOVmTX0AAXmzk.jpg">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <!-- App CSS -->
@@ -29,7 +31,7 @@
         <!-- navbar -->
         <nav class="navbar navbar-expand-md bg-dark navbar-dark">
             <!--si el usuario es administrador, que al clickar en el logo, vaya a la vista admin.gestion y si es usuario normal que vaya a al home-->
-            @if(auth()->user()->role == 'admin')
+            @if(auth()->check('admin'))
               <a class="navbar-brand" href="{{ route('admin.index') }}">
                 <img src="https://pbs.twimg.com/media/FgAOVmTX0AAXmzk.jpg" alt="Logo" style="width:70px; height: 70px;">
               </a>
@@ -75,7 +77,7 @@
           <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
           <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/locale/es.js'></script>
           <!--cdn interaction-->
-          <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/gcal.js'></script>
+          <!--<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/gcal.js'></script>-->
           <!--cdn interaction-->
           <!--<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/interaction/main.js'></script>-->
           

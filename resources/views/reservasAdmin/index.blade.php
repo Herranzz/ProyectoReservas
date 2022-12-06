@@ -47,7 +47,7 @@
                                         @foreach ($reservas as $dato)
                                             <tr>
                                                 <td>{{ $dato->codigoProfesor }}</td>
-                                                <td>{{ $dato->idEquipo }}</td>
+                                                <td>{{ $dato->numEquipos }}</td>
                                                 <td>{{ $dato->horaInicio }}</td>
                                             </tr>
                                         @endforeach

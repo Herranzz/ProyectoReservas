@@ -60,7 +60,8 @@ Route::delete('/admin/gestion/ubicaciones/eliminar/{id}', [UbicacionController::
 //crud reservas------------------------------------------------------------
 Route::get('/admin/gestion/reservas', [ReservasAdminController::class, 'index'])->middleware('auth.admin')->name('reservasAdmin.index');
 
-//reservas de usuario
+//reservas del usuario de la sesion
+
 Route::get('/reservas', [ReservasController::class, 'index'])->middleware('auth')->name('reservas.index');
 
 Route::get('/reservas/crear', [ReservasController::class, 'create'])->name('reservas.create');

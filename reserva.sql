@@ -49,12 +49,11 @@ create table if not exists inventario(
 create table if not exists reservas(
     id int not null auto_increment primary key,
     codigoProfesor varchar(10) not null,
+    tipoEquipos varchar(50) not null,
     numEquipos int(50) not null,
     horaInicio timestamp not null,
     color varchar(50) not null,
         FOREIGN KEY (codigoProfesor) REFERENCES users(codigo)
 );
 
-create trigger updateEstado after insert on reservas
-for each row
-    update inventario set estado = "ocupado" where idEquipo = new.idEquipo;
+//trigger que sume uno en la tabla numeroEquipos cada vez que se inserta un equipo de tipo portatil

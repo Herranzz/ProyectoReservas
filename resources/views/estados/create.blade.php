@@ -8,26 +8,20 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Nuevo Estado') }}</div>
-
                 <!--si el codigo del usuario ya esxiste en la base de datos mostrar-->
                 <div class="card-body">
                     <form method="POST" action="">
                         <!--Por motivos de seguridad se añade el siguiente @-->
                         @csrf
-
                           <div class="form-group row">
-
                             <label for="id" class="col-md-4 col-form-label text-md-right">{{ __('ID') }}</label>
-
                             <div class="col-md-6">
                                 <input id="id" type="text" class="form-control " name="id" value="{{ old('id') }}" required autocomplete="id" autofocus>
 
                                 @error('id')
                                     <div class="alert alert-danger" role="alert"> {{ $message }} </div>
                                 @enderror
-
                             </div>
-
                             <label for="estado" class="col-md-4 col-form-label text-md-right">{{ __('Estado') }}</label>
 
                             <div class="col-md-6">
@@ -36,11 +30,8 @@
                                 @error('estado')
                                     <div class="alert alert-danger" role="alert"> {{ $message }} </div>
                                 @enderror
-
                             </div>
-                            
                         </div>
-
                         <!--boton registrar-->
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
@@ -57,4 +48,10 @@
         </div>
     </div>
 </div>
+<script>
+    //pasar input estado a minusculas al salir de el
+    $('#estado').blur(function(){
+        $('#estado').val($('#estado').val().toLowerCase());
+    });
+</script>
 @endsection

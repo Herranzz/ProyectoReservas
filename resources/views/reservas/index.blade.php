@@ -88,7 +88,7 @@
                 events: [
                     @foreach($reservas as $reserva)
                     {
-                        title: '{{$reserva->codigoProfesor}} {{$reserva->horaInicio}}',
+                        title: '{{$reserva->codigoProfesor}} Nº de Equipos: {{$reserva->numEquipos}}',
                         start: '{{$reserva->horaInicio}}',
                         end: '{{$reserva->horaInicio}}',
                         color: '{{$reserva->color}}',
@@ -105,7 +105,7 @@
                     // change the day's background color just for fun
                     //$(this).css('background-color', 'red');
                     window.location.href = "{{ route('reservas.create') }}";
-                    $('#horaInicio').val(date.format());
+                    //$('#horaInicio').val(date.format());
                     //$('#horaFin').val(date.format());
                     //$('#fechaReserva').val(date.format());
                 },

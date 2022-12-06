@@ -57,4 +57,10 @@
         </div>
     </div>
 </div>
+<script>
+    //pasar el input tipo a minusculas al salir de el
+    $('#tipo').blur(function(){
+        $('#tipo').val($('#tipo').val().toLowerCase());
+    }); 
+</script>
 @endsection
