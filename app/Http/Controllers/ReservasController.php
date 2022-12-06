@@ -39,7 +39,7 @@ class ReservasController extends Controller
 
         $reserva->save();
 
-        return redirect()->to('/admin/gestion/reservas')->with('message', 'Reservado con éxito');
+        return redirect()->to('/reservas')->with('message', 'Reservado con éxito');
     }
 
     public function edit($id)

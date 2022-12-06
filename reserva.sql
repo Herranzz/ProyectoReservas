@@ -55,5 +55,3 @@ create table if not exists reservas(
     color varchar(50) not null,
         FOREIGN KEY (codigoProfesor) REFERENCES users(codigo)
 );
-
-//trigger que sume uno en la tabla numeroEquipos cada vez que se inserta un equipo de tipo portatil

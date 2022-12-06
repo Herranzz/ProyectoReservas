@@ -21,10 +21,9 @@ class ReservasAdminController extends Controller
             $builder->select('reservas.*')
             ->where('id','LIKE','%'.$texto.'%')
             ->orWhere('codigoProfesor','LIKE','%'.$texto.'%')
-            ->orWhere('idEquipo','LIKE','%'.$texto.'%')
-            ->orWhere('horaInicio','LIKE','%'.$texto.'%')
-            ->orWhere('horaFin','LIKE','%'.$texto.'%')
-            ->orWhere('fechaReserva','LIKE','%'.$texto.'%');
+            ->orWhere('tipoEquipos','LIKE','%'.$texto.'%')
+            ->orWhere('numEquipos','LIKE','%'.$texto.'%')
+            ->orWhere('horaInicio','LIKE','%'.$texto.'%');
         }
 
         $reservas = $builder->paginate(10);

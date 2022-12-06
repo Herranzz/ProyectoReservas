@@ -181,7 +181,7 @@
                                     <option value="10:20:00" title="10:20">3</option>
                                     <option value="11:40:00" title="11:40">4</option>
                                     <option value="12:35:00" title="12:35">5</option>
-                                    <option value="13:30:00" title="13:30">6</option>
+                                    <option value="23:50:00" title="13:30">6</option>
                                 </select>
 
                                 <input type="horaInicio" class="form-control" name="horaInicio" id="horaInicio"
@@ -290,9 +290,6 @@
         });
 
         //actualizar el valor del input numEquipos a la vez que se elige otro option en el select numEquipos
-        document.getElementById("numEquipos").addEventListener("change", function() {
-            document.getElementById("numEquipos").value = document.getElementById("numPortatiles").value;
-        });
 
 
         //hacer que a medida que cambia el select con id tipos pinte el value en el input con id tiposEquipos

@@ -88,7 +88,7 @@
                 events: [
                     @foreach($reservas as $reserva)
                     {
-                        title: '{{$reserva->codigoProfesor}} Nº de Equipos: {{$reserva->numEquipos}}',
+                        title: '{{$reserva->tipoEquipos}}: {{$reserva->numEquipos}}',
                         start: '{{$reserva->horaInicio}}',
                         end: '{{$reserva->horaInicio}}',
                         color: '{{$reserva->color}}',
