@@ -43,7 +43,7 @@
                                             </form>
                                         </th>
                                         <!--campo para argregar un archivo csv-->
-                                        <form method="post" action="#" enctype="multipart/form-data">
+                                        <form method="post" action="{{ route('inventario.import') }}" enctype="multipart/form-data">
                                             @csrf
                                             <div class="form-group row" style="width: 80%;">
                                                 <div class="col-md-6 offset-md-4">

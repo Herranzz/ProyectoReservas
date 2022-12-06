@@ -105,6 +105,27 @@ class InventarioController extends Controller
         $inventario->delete();
 
         return redirect()->to('/admin/gestion/inventario')->with('message', 'Equipo eliminado del inventario correctamente');
-}
+    }
+    //funcion import csv
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:csv,txt'
+        ]);
+
+        $file = fopen($request->file, 'r');
+
+        while (($column = fgetcsv($file, 10000, ";")) !== FALSE) {
+            $inventario = new Inventario();
+            $inventario->ubicacion = $column[0];
+            $inventario->idEquipo = $column[1];
+            $inventario->descripcion = $column[2];
+            $inventario->estado = $column[3];
+
+            $inventario->save();
+        }
+
+        return redirect()->to('/admin/gestion/inventario')->with('message', 'Inventario importado correctamente');
+    }
 
 }

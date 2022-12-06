@@ -29,7 +29,7 @@ class EquiposController extends Controller
             ->orWhere('numSerie','LIKE','%'.$texto.'%');
         }
 
-        $equipos = $builder->paginate(10);
+        $equipos = $builder->paginate(5);
 
         return view('equipos.index', compact('equipos','texto'));
     }

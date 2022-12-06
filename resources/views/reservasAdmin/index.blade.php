@@ -29,6 +29,7 @@
                                     </tr>
                                     <tr>
                                         <th scope="col">Código Profesor</th>
+                                        <th scope="col">Tipo de Equipo</th>
                                         <th scope="col">Nº Equipos</th>
                                         <th scope="col">Fecha y Hora de Reserva</th>
                                     </tr>
@@ -47,6 +48,7 @@
                                         @foreach ($reservas as $dato)
                                             <tr>
                                                 <td>{{ $dato->codigoProfesor }}</td>
+                                                <td>{{ $dato->tipoEquipos }}</td>
                                                 <td>{{ $dato->numEquipos }}</td>
                                                 <td>{{ $dato->horaInicio }}</td>
                                             </tr>

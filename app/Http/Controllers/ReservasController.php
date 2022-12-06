@@ -20,26 +20,12 @@ class ReservasController extends Controller
 
     public function create()
     {
-        //select count(*) from inventario where estado = 'libre' and idEquipo in (select id from equipos where tipo = 'portatil');
-        $portatiles = DB::table('inventario')
-            ->where('estado', 'libre')
-            ->where('idEquipo', DB::table('equipos')->where('tipo', 'portatil')->value('id'))
-            ->count();
-        $sobremesa = DB::table('inventario')
-            ->where('estado', 'libre')
-            ->where('idEquipo', DB::table('equipos')->where('tipo', 'sobremesa')->value('id'))
-            ->count();
-        $tablets = DB::table('inventario')
-            ->where('estado', 'libre')
-            ->where('idEquipo', DB::table('equipos')->where('tipo', 'tablet')->value('id'))
-            ->count();  
-
         $reserva = new Reservas();
 
         $users = User::all();
         $inventario = Inventario::all();
         $tipos = Tipos::all();
-        return view('reservas.create', compact('reserva', 'users', 'inventario', 'tipos', 'portatiles', 'sobremesa', 'tablets'));
+        return view('reservas.create', compact('reserva', 'users', 'inventario', 'tipos'));
     }
 
     public function store(Request $request)
