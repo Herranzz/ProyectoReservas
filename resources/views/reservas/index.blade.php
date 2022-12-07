@@ -81,9 +81,12 @@
                 header: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'month,agendaWeek,agendaDay'
+                    right: 'month'
                 },
                 
+                //ocultar dias sabado y domingo
+                hiddenDays: [0, 6],
+
                 //mostrar las reservas del usuario
                 events: [
                     @foreach($reservas as $reserva)

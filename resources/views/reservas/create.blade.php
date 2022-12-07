@@ -220,13 +220,13 @@
 
                                 <!--select con 6 options cuyo valor son las horas de 8:00:00 a 14:00:00-->
                                 <select id="hora" name="hora" title="horas del día" autofocus required>
-                                    <option value="">Seleccionar</option>
-                                    <option value="08:30:00" title="08:30">1</option>
-                                    <option value="09:25:00" title="09:25">2</option>
-                                    <option value="10:20:00" title="10:20">3</option>
-                                    <option value="11:40:00" title="11:40">4</option>
-                                    <option value="12:35:00" title="12:35">5</option>
-                                    <option value="13:30:00" title="13:30">6</option>
+                                    <option value="">Hora</option>
+                                    <option value="08:30:00" title="08:30-09:20">1</option>
+                                    <option value="09:25:00" title="09:25-10:15">2</option>
+                                    <option value="10:20:00" title="10:20-11:10">3</option>
+                                    <option value="11:40:00" title="11:40-12:30">4</option>
+                                    <option value="12:35:00" title="12:35-13:25">5</option>
+                                    <option value="13:30:00" title="13:30-14:20">6</option>
                                 </select>
 
                                 <input type="horaInicio" class="form-control" name="horaInicio" id="horaInicio"
@@ -265,7 +265,11 @@
         var fecha = document.getElementById("fecha").value;
         var selHora = document.getElementById("hora");
         var selectPortatiles = document.getElementById('numPortatiles').options.length-1;
-        var totalPortatiles = parseInt(document.getElementById('totalPortatiles').value);
+        var selectPortatilesConvertibles = document.getElementById('numPortatilesConvertibles').options.length-1;
+        var selectTelefonoMovil = document.getElementById('numTelefonoMovil').options.length-1;
+        var selectSobremesa = document.getElementById('numSobremesa').options.length-1;
+        var selectTablets = document.getElementById('numTablets').options.length-1;
+
 
         //actualizar el valor del input horaInicio a la vez que se elige otro option en el select hora
         document.getElementById("hora").addEventListener("change", function() {
@@ -382,64 +386,247 @@
             document.getElementById("tipoEquipos").value = document.getElementById("tipos").value;
         });
 
-        //funcion que saque un alert
+        //muestra los campos option ocultos de selectPortatiles
         function desocultarOptionsPortatil() {
             //desocultar los campos del select numPortatiles
             for (var i = selectPortatiles; i > 0; i--) {
                 document.getElementById('numPortatiles').options[i].removeAttribute("hidden");
             }
         }
+        //muestra los campos option ocultos de selectPortatilesConvertibles
+        function desocultarOptionsPortatilConvertible() {
+            //desocultar los campos del select numPortatilesConvertibles
+            for (var i = selectPortatilesConvertibles; i > 0; i--) {
+                document.getElementById('numPortatilesConvertibles').options[i].removeAttribute("hidden");
+            }
+        }
+        //muestra los campos option ocultos de selectSobremesa
+        function desocultarOptionsSobremesa() {
+            //desocultar los campos del select numSobremesa
+            for (var i = selectSobremesa; i > 0; i--) {
+                document.getElementById('numSobremesa').options[i].removeAttribute("hidden");
+            }
+        }
+        //muestra los campos option ocultos de selectTablets
+        function desocultarOptionsTablets() {
+            //desocultar los campos del select numTablets
+            for (var i = selectTablets; i > 0; i--) {
+                document.getElementById('numTablets').options[i].removeAttribute("hidden");
+            }
+        }
+        //muestra los campos option ocultos de selectTelefonoMovil
+        function desocultarOptionsTelefonoMovil() {
+            //desocultar los campos del select numTelefonoMovil
+            for (var i = selectTelefonoMovil; i > 0; i--) {
+                document.getElementById('numTelefonoMovil').options[i].removeAttribute("hidden");
+            }
+        }
+
 
         //fijandose en el option del select hora saque el numPortatiles que hay que quitar del select numPortatiles y lo quite
         selHora.addEventListener("change", function() {
             if (selHora.value == "08:30:00") {
                 desocultarOptionsPortatil()
-                var p1 = selectPortatiles - parseInt(document.getElementById("portatil1").value);
+                desocultarOptionsPortatilConvertible()
+                desocultarOptionsSobremesa()
+                desocultarOptionsTablets()
+                desocultarOptionsTelefonoMovil()
 
-                //ocultar los options
+                var p1 = selectPortatiles - parseInt(document.getElementById("portatil1").value);
+                var pc1 = selectPortatilesConvertibles - parseInt(document.getElementById("portatilc1").value);
+                var s1 = selectSobremesa - parseInt(document.getElementById("sobremesa1").value);
+                var t1 = selectTablets - parseInt(document.getElementById("tablet1").value);
+                var tm1 = selectTelefonoMovil - parseInt(document.getElementById("telefono1").value);
+
+                //ocultar los options de portatiles reservados
                 for (var i = selectPortatiles; i > p1; i--) {
                     document.getElementById('numPortatiles').options[i].setAttribute("hidden", "true");
+                }
+                //ocultar los options de portatiles convertibles reservados
+                for (var i = selectPortatilesConvertibles; i > pc1; i--) {
+                    document.getElementById('numPortatilesConvertibles').options[i].setAttribute("hidden", "true");
+                }
+                //ocultar los options de sobremesa reservados
+                for (var i = selectSobremesa; i > s1; i--) {
+                    document.getElementById('numSobremesa').options[i].setAttribute("hidden", "true");
+                }
+                //ocultar los options de tablets reservados
+                for (var i = selectTablets; i > t1; i--) {
+                    document.getElementById('numTablets').options[i].setAttribute("hidden", "true");
+                }
+                //ocultar los options de telefono movil reservados
+                for (var i = selectTelefonoMovil; i > tm1; i--) {
+                    document.getElementById('numTelefonoMovil').options[i].setAttribute("hidden", "true");
                 }
                 
             } else if (selHora.value == "09:25:00"){
                 desocultarOptionsPortatil()
-                var p2 = selectPortatiles - parseInt(document.getElementById("portatil2").value);
+                desocultarOptionsPortatilConvertible()
+                desocultarOptionsSobremesa()
+                desocultarOptionsTablets()
+                desocultarOptionsTelefonoMovil()
 
-                //ocultar los options
+                var p2 = selectPortatiles - parseInt(document.getElementById("portatil2").value);
+                var pc2 = selectPortatilesConvertibles - parseInt(document.getElementById("portatilc2").value);
+                var s2 = selectSobremesa - parseInt(document.getElementById("sobremesa2").value);
+                var t2 = selectTablets - parseInt(document.getElementById("tablet2").value);
+                var tm2 = selectTelefonoMovil - parseInt(document.getElementById("telefono2").value);
+
+                //ocultar los options de portatiles reservados
                 for (var i = selectPortatiles; i > p2; i--) {
                     document.getElementById('numPortatiles').options[i].setAttribute("hidden", "true");
                 }
+                //ocultar los options de portatiles convertibles reservados
+                for (var i = selectPortatilesConvertibles; i > pc2; i--) {
+                    document.getElementById('numPortatilesConvertibles').options[i].setAttribute("hidden", "true");
+                }
+                //ocultar los options de sobremesa reservados
+                for (var i = selectSobremesa; i > s2; i--) {
+                    document.getElementById('numSobremesa').options[i].setAttribute("hidden", "true");
+                }
+                //ocultar los options de tablets reservados
+                for (var i = selectTablets; i > t2; i--) {
+                    document.getElementById('numTablets').options[i].setAttribute("hidden", "true");
+                }
+                //ocultar los options de telefono movil reservados
+                for (var i = selectTelefonoMovil; i > tm2; i--) {
+                    document.getElementById('numTelefonoMovil').options[i].setAttribute("hidden", "true");
+                }
+
             } else if (selHora.value == "10:20:00"){
                 desocultarOptionsPortatil()
-                var p2 = selectPortatiles - parseInt(document.getElementById("portatil3").value);
+                desocultarOptionsPortatilConvertible()
+                desocultarOptionsSobremesa()
+                desocultarOptionsTablets()
+                desocultarOptionsTelefonoMovil()
 
-                //ocultar los options
-                for (var i = selectPortatiles; i > p2; i--) {
+                var p3 = selectPortatiles - parseInt(document.getElementById("portatil3").value);
+                var pc3 = selectPortatilesConvertibles - parseInt(document.getElementById("portatilc3").value);
+                var s3 = selectSobremesa - parseInt(document.getElementById("sobremesa3").value);
+                var t3 = selectTablets - parseInt(document.getElementById("tablet3").value);
+                var tm3 = selectTelefonoMovil - parseInt(document.getElementById("telefono3").value);
+
+                //ocultar los options portatiles reservados
+                for (var i = selectPortatiles; i > p3; i--) {
                     document.getElementById('numPortatiles').options[i].setAttribute("hidden", "true");
                 }
+                //ocultar los options de portatiles convertibles reservados
+                for (var i = selectPortatilesConvertibles; i > pc3; i--) {
+                    document.getElementById('numPortatilesConvertibles').options[i].setAttribute("hidden", "true");
+                }
+                //ocultar los options de sobremesa reservados
+                for (var i = selectSobremesa; i > s3; i--) {
+                    document.getElementById('numSobremesa').options[i].setAttribute("hidden", "true");
+                }
+                //ocultar los options de tablets reservados
+                for (var i = selectTablets; i > t3; i--) {
+                    document.getElementById('numTablets').options[i].setAttribute("hidden", "true");
+                }
+                //ocultar los options de telefono movil reservados
+                for (var i = selectTelefonoMovil; i > tm3; i--) {
+                    document.getElementById('numTelefonoMovil').options[i].setAttribute("hidden", "true");
+                }
+
             } else if (selHora.value == "11:40:00"){
                 desocultarOptionsPortatil()
-                var p2 = selectPortatiles - parseInt(document.getElementById("portatil4").value);
+                desocultarOptionsPortatilConvertible()
+                desocultarOptionsSobremesa()
+                desocultarOptionsTablets()
+                desocultarOptionsTelefonoMovil()
 
-                //ocultar los options
-                for (var i = selectPortatiles; i > p2; i--) {
+                var p4 = selectPortatiles - parseInt(document.getElementById("portatil4").value);
+                var pc4 = selectPortatilesConvertibles - parseInt(document.getElementById("portatilc4").value);
+                var s4 = selectSobremesa - parseInt(document.getElementById("sobremesa4").value);
+                var t4 = selectTablets - parseInt(document.getElementById("tablet4").value);
+                var tm4 = selectTelefonoMovil - parseInt(document.getElementById("telefono4").value);
+
+                //ocultar los options de portatiles reservados
+                for (var i = selectPortatiles; i > p4; i--) {
                     document.getElementById('numPortatiles').options[i].setAttribute("hidden", "true");
                 }
+                //ocultar los options de portatiles convertibles reservados
+                for (var i = selectPortatilesConvertibles; i > pc4; i--) {
+                    document.getElementById('numPortatilesConvertibles').options[i].setAttribute("hidden", "true");
+                }
+                //ocultar los options de sobremesa reservados
+                for (var i = selectSobremesa; i > s4; i--) {
+                    document.getElementById('numSobremesa').options[i].setAttribute("hidden", "true");
+                }
+                //ocultar los options de tablets reservados
+                for (var i = selectTablets; i > t4; i--) {
+                    document.getElementById('numTablets').options[i].setAttribute("hidden", "true");
+                }
+                //ocultar los options de telefono movil reservados
+                for (var i = selectTelefonoMovil; i > tm4; i--) {
+                    document.getElementById('numTelefonoMovil').options[i].setAttribute("hidden", "true");
+                }
+
             } else if (selHora.value == "12:35:00"){
                 desocultarOptionsPortatil()
-                var p2 = selectPortatiles - parseInt(document.getElementById("portatil5").value);
+                desocultarOptionsPortatilConvertible()
+                desocultarOptionsSobremesa()
+                desocultarOptionsTablets()
+                desocultarOptionsTelefonoMovil()
 
-                //ocultar los options
-                for (var i = selectPortatiles; i > p2; i--) {
+                var p5 = selectPortatiles - parseInt(document.getElementById("portatil5").value);
+                var pc5 = selectPortatilesConvertibles - parseInt(document.getElementById("portatilc5").value);
+                var s5 = selectSobremesa - parseInt(document.getElementById("sobremesa5").value);
+                var t5 = selectTablets - parseInt(document.getElementById("tablet5").value);
+                var tm5 = selectTelefonoMovil - parseInt(document.getElementById("telefono5").value);
+
+                //ocultar los options de portatiles reservados
+                for (var i = selectPortatiles; i > p5; i--) {
                     document.getElementById('numPortatiles').options[i].setAttribute("hidden", "true");
                 }
+                //ocultar los options de portatiles convertibles reservados
+                for (var i = selectPortatilesConvertibles; i > pc5; i--) {
+                    document.getElementById('numPortatilesConvertibles').options[i].setAttribute("hidden", "true");
+                }
+                //ocultar los options de sobremesa reservados
+                for (var i = selectSobremesa; i > s5; i--) {
+                    document.getElementById('numSobremesa').options[i].setAttribute("hidden", "true");
+                }
+                //ocultar los options de tablets reservados
+                for (var i = selectTablets; i > t5; i--) {
+                    document.getElementById('numTablets').options[i].setAttribute("hidden", "true");
+                }
+                //ocultar los options de telefono movil reservados
+                for (var i = selectTelefonoMovil; i > tm5; i--) {
+                    document.getElementById('numTelefonoMovil').options[i].setAttribute("hidden", "true");
+                }
+
             } else if (selHora.value == "13:30:00"){
                 desocultarOptionsPortatil()
-                var p2 = selectPortatiles - parseInt(document.getElementById("portatil6").value);
+                desocultarOptionsPortatilConvertible()
+                desocultarOptionsSobremesa()
+                desocultarOptionsTablets()
+                desocultarOptionsTelefonoMovil()
 
-                //ocultar los options
-                for (var i = selectPortatiles; i > p2; i--) {
+                var p6 = selectPortatiles - parseInt(document.getElementById("portatil6").value);
+                var pc6 = selectPortatilesConvertibles - parseInt(document.getElementById("portatilc6").value);
+                var s6 = selectSobremesa - parseInt(document.getElementById("sobremesa6").value);
+                var t6 = selectTablets - parseInt(document.getElementById("tablet6").value);
+                var tm6 = selectTelefonoMovil - parseInt(document.getElementById("telefono6").value);
+
+                //ocultar los options de portatiles reservados
+                for (var i = selectPortatiles; i > p6; i--) {
                     document.getElementById('numPortatiles').options[i].setAttribute("hidden", "true");
+                }
+                //ocultar los options de portatiles convertibles reservados
+                for (var i = selectPortatilesConvertibles; i > pc6; i--) {
+                    document.getElementById('numPortatilesConvertibles').options[i].setAttribute("hidden", "true");
+                }
+                //ocultar los options de sobremesa reservados
+                for (var i = selectSobremesa; i > s6; i--) {
+                    document.getElementById('numSobremesa').options[i].setAttribute("hidden", "true");
+                }
+                //ocultar los options de tablets reservados
+                for (var i = selectTablets; i > t6; i--) {
+                    document.getElementById('numTablets').options[i].setAttribute("hidden", "true");
+                }
+                //ocultar los options de telefono movil reservados
+                for (var i = selectTelefonoMovil; i > tm6; i--) {
+                    document.getElementById('numTelefonoMovil').options[i].setAttribute("hidden", "true");
                 }
             } 
         });
