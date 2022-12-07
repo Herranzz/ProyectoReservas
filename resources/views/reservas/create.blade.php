@@ -15,7 +15,7 @@
                 <div class="card">
                     <div class="card-header">{{ __('Reservar') }}</div>
                     <div class="card-body">
-                        <form method="POST" action="">
+                        <form method="POST" id="form1" action="">
                             <!--Por motivos de seguridad se añade el siguiente @-->
                             @csrf
 
@@ -24,16 +24,15 @@
                                 <!--el input tiene que aparecer el codigo del profesor de la sesion-->
                                 <input type="text" class="form-control" name="codigoProfesor" id="codigoProfesor"
                                     value='{{ auth()->user()->codigo }}' placeholder="" hidden>
-
                             </div>
 
                             <!--traer los tipos de la tabla externa tipos y pintarlo en un options-->
                             <div class="form-group row">
                                 <label for="tipo"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Tipo') }}</label>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <select id="tipos" type="text" class="form-control " name="tipo"
-                                        value="tipos" required autocomplete="tipo" autofocus>
+                                        value="tipos" required autocomplete="tipo">
                                         <option value="">----</option>
                                         @foreach ($tipos as $tipo)
                                             <option value="{{ $tipo->tipo }}">{{ $tipo->tipo }}</option>
@@ -43,13 +42,10 @@
                                     <input name="tipoEquipos" id="tipoEquipos" required hidden>
                                 </div>
 
-                                <!--input donde recojo el número de equipos que seleccione-->
-                                <div class="col-md-3">
-                                    <input id="numEquipos" type="text" class="form-control" value="" name="numEquipos"
-                                        autocomplete="numEquipos" hidden>
-                                </div>
-                            </div class="form group row">
-                                <!--lo uso para sacar el numero de equipos de cada tipo-->
+                                <!--lo uso para sacar el numero de equipos de cada tipo IMPORTANTE-->
+                                <!--IMPORTANTE-->
+                                <!--IMPORTANTE-->
+                                <!--IMPORTANTE-->
                                 <?php $conn = mysqli_connect('localhost', 'root', '', 'reservaequiposs'); ?>
                                 <!--seelct con el numero de portatiles recogidos por la variable $portatiles de ReservasController-->
                                 <select id="numPortatiles" name="numPortatiles" title="portatiles disponibles" hidden>
@@ -68,6 +64,8 @@
                                     for ($i = 1; $i <= $total; $i++) {
                                         echo "<option value='$i'>$i</option>";
                                     }
+                                    //numero total de portátiles que hay libres en este momento
+                                    echo "<input  name='totalPortatiles' id='totalPortatiles' value='$total' hidden>"
                                     ?>
                                 </select>
 
@@ -87,6 +85,7 @@
                                     for ($i = 1; $i <= $total; $i++) {
                                         echo "<option value='$i'>$i</option>";
                                     }
+                                    echo "<input  name='totalPortatilesConvertibles' id='totalPortatilesConvertibles' value='$total' hidden>"
                                     ?>
                                 </select>
 
@@ -106,6 +105,7 @@
                                     for ($i = 1; $i <= $total; $i++) {
                                         echo "<option value='$i'>$i</option>";
                                     }
+                                    echo "<input  name='totalTelefonoMovil' id='totalTelefonoMovil' value='$total' hidden>"
                                     ?>
                                 </select>
 
@@ -125,6 +125,7 @@
                                     for ($i = 1; $i <= $total; $i++) {
                                         echo "<option value='$i'>$i</option>";
                                     }
+                                    echo "<input  name='totalSobremesa' id='totalSobremesa' value='$total' hidden>"
                                     ?>
                                 </select>
 
@@ -144,10 +145,13 @@
                                     for ($i = 1; $i <= $total; $i++) {
                                         echo "<option value='$i'>$i</option>";
                                     }
+                                    echo "<input  name='totalTablets' id='totalTablets' value='$total' hidden>"
                                     ?>
                                 </select>
 
-
+                                <!--input donde recojo el número de equipos que seleccione-->
+                                <input id="numEquipos" type="text" class="form-control" value="" name="numEquipos"
+                                        autocomplete="numEquipos" hidden>
                             </div>
                             
                             <!--consulta sql que muestre el numero de equipos que hay reservados en la hora seleccionada-->
@@ -215,8 +219,8 @@
                                 </div>
 
                                 <!--select con 6 options cuyo valor son las horas de 8:00:00 a 14:00:00-->
-                                <select id="hora" name="hora" title="horas del día" required>
-                                    <option value="" selected>Seleccionar</option>
+                                <select id="hora" name="hora" title="horas del día" autofocus required>
+                                    <option value="">Seleccionar</option>
                                     <option value="08:30:00" title="08:30">1</option>
                                     <option value="09:25:00" title="09:25">2</option>
                                     <option value="10:20:00" title="10:20">3</option>
@@ -259,6 +263,9 @@
     <script>
         //pintar la fecha y la hora seleccionada en el input horaInicio (la hora de forma dinamica)
         var fecha = document.getElementById("fecha").value;
+        var selHora = document.getElementById("hora");
+        var selectPortatiles = document.getElementById('numPortatiles').options.length-1;
+        var totalPortatiles = parseInt(document.getElementById('totalPortatiles').value);
 
         //actualizar el valor del input horaInicio a la vez que se elige otro option en el select hora
         document.getElementById("hora").addEventListener("change", function() {
@@ -274,7 +281,7 @@
             var fechaHoraActual = new Date();
             var fechaHoraElegida = new Date(fechaHora);
             //les dejo un margen para poder reservar de 30 minutos en la hora elegida para que no de error al enviar el formulario en las validaciones, porque si no está este parámetro, al enviar el formulario, la hora elegida ya habrá pasado y no dejará reservar en esa franja horaria seleccionada
-            fechaHoraElegida.setMinutes(fechaHoraElegida.getMinutes() + 500);
+            fechaHoraElegida.setMinutes(fechaHoraElegida.getMinutes() + 900);
             //mostrar el alert con id alert solo cuando se seleccione un option en el select, no mostrarlo al cargar la pagina
             if (document.getElementById("hora").value != "") {
                 if (fechaHoraElegida < fechaHoraActual) {
@@ -337,6 +344,19 @@
             }
         });
 
+
+        //al cargar la pagina ponga el select con id tipos disabled
+        document.getElementById("tipos").setAttribute("disabled", "true");
+        //mientras el seelct con id hora esté con la opcion con valor nulo (no se haya seleccionado ninguna hora), desabilitar el select con id tipos
+        document.getElementById("hora").addEventListener("change", function() {
+            if (document.getElementById("hora").value == "") {
+                document.getElementById("tipos").setAttribute("disabled", "true");
+                document.getElementById("tipos").value = "";
+            } else {
+                document.getElementById("tipos").removeAttribute("disabled");
+            }
+        });
+
         //hacer que a medida que cambia el select con id numPortatiles pinte el value en el input con id numEquipos
         numPortatiles.addEventListener("change", function() {
             document.getElementById("numEquipos").value = numPortatiles.value;
@@ -362,6 +382,66 @@
             document.getElementById("tipoEquipos").value = document.getElementById("tipos").value;
         });
 
+        //funcion que saque un alert
+        function desocultarOptionsPortatil() {
+            //desocultar los campos del select numPortatiles
+            for (var i = selectPortatiles; i > 0; i--) {
+                document.getElementById('numPortatiles').options[i].removeAttribute("hidden");
+            }
+        }
 
+        //fijandose en el option del select hora saque el numPortatiles que hay que quitar del select numPortatiles y lo quite
+        selHora.addEventListener("change", function() {
+            if (selHora.value == "08:30:00") {
+                desocultarOptionsPortatil()
+                var p1 = selectPortatiles - parseInt(document.getElementById("portatil1").value);
+
+                //ocultar los options
+                for (var i = selectPortatiles; i > p1; i--) {
+                    document.getElementById('numPortatiles').options[i].setAttribute("hidden", "true");
+                }
+                
+            } else if (selHora.value == "09:25:00"){
+                desocultarOptionsPortatil()
+                var p2 = selectPortatiles - parseInt(document.getElementById("portatil2").value);
+
+                //ocultar los options
+                for (var i = selectPortatiles; i > p2; i--) {
+                    document.getElementById('numPortatiles').options[i].setAttribute("hidden", "true");
+                }
+            } else if (selHora.value == "10:20:00"){
+                desocultarOptionsPortatil()
+                var p2 = selectPortatiles - parseInt(document.getElementById("portatil3").value);
+
+                //ocultar los options
+                for (var i = selectPortatiles; i > p2; i--) {
+                    document.getElementById('numPortatiles').options[i].setAttribute("hidden", "true");
+                }
+            } else if (selHora.value == "11:40:00"){
+                desocultarOptionsPortatil()
+                var p2 = selectPortatiles - parseInt(document.getElementById("portatil4").value);
+
+                //ocultar los options
+                for (var i = selectPortatiles; i > p2; i--) {
+                    document.getElementById('numPortatiles').options[i].setAttribute("hidden", "true");
+                }
+            } else if (selHora.value == "12:35:00"){
+                desocultarOptionsPortatil()
+                var p2 = selectPortatiles - parseInt(document.getElementById("portatil5").value);
+
+                //ocultar los options
+                for (var i = selectPortatiles; i > p2; i--) {
+                    document.getElementById('numPortatiles').options[i].setAttribute("hidden", "true");
+                }
+            } else if (selHora.value == "13:30:00"){
+                desocultarOptionsPortatil()
+                var p2 = selectPortatiles - parseInt(document.getElementById("portatil6").value);
+
+                //ocultar los options
+                for (var i = selectPortatiles; i > p2; i--) {
+                    document.getElementById('numPortatiles').options[i].setAttribute("hidden", "true");
+                }
+            } 
+        });
     </script>
 @endsection
