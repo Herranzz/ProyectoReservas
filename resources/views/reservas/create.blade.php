@@ -7,9 +7,29 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="container">
-                    <div class="alert alert-warning" id="alert">
+                    <div class="alert alert-warning" id="alert" hidden>
                         <strong>Cuidado!</strong> Ten en cuenta que tienes que elegir una hora que aún esté disponible en el
                         día de hoy.
+                    </div>
+                    <!--alert no hay telefonos moviles-->
+                    <div class="alert alert-danger" id="tlfnoAlert" hidden>
+                        No hay teléfonos móviles disponibles en esta hora.
+                    </div>
+                    <!--alert no hay portatiles-->
+                    <div class="alert alert-danger" id="portatilAlert" hidden>
+                        No hay portátiles disponibles en esta hora.
+                    </div>
+                    <!--alert no hay portatiles convertibles-->
+                    <div class="alert alert-danger" id="portatilConvertibleAlert" hidden>
+                        No hay portátiles convertibles disponibles en esta hora.
+                    </div>
+                    <!--alert no hay ordenadores de sobremesa-->
+                    <div class="alert alert-danger" id="ordenadorSobremesaAlert" hidden>
+                        No hay ordenadores de sobremesa disponibles en esta hora.
+                    </div>
+                    <!--alert no hay tablets-->
+                    <div class="alert alert-danger" id="tabletAlert" hidden>
+                        No hay tablets disponibles en esta hora.
                     </div>
                 </div>
                 <div class="card">
@@ -90,7 +110,7 @@
                                 </select>
 
                                 <select id="numTelefonoMovil" name="numTelefonoMovil" title="telefonos disponibles" hidden>
-                                    <option value="" disabled></option>
+                                    <option value="" disabled selected>Nº</option>
                                     <!--codigo php que haga una consulta sql-->
                                     <?php
                                     //consulta sql que cuente el numero de telefonos moviles libres que hay en la tabla inventario y lo pinte en el select
@@ -151,7 +171,7 @@
 
                                 <!--input donde recojo el número de equipos que seleccione-->
                                 <input id="numEquipos" type="text" class="form-control" value="" name="numEquipos"
-                                        autocomplete="numEquipos" hidden>
+                                        autocomplete="numEquipos" required hidden>
                             </div>
                             
                             <!--consulta sql que muestre el numero de equipos que hay reservados en la hora seleccionada-->
@@ -264,11 +284,21 @@
         //pintar la fecha y la hora seleccionada en el input horaInicio (la hora de forma dinamica)
         var fecha = document.getElementById("fecha").value;
         var selHora = document.getElementById("hora");
+        var selP = document.getElementById('numPortatiles');
         var selectPortatiles = document.getElementById('numPortatiles').options.length-1;
+        var selPC = document.getElementById('numPortatilesConvertibles');
         var selectPortatilesConvertibles = document.getElementById('numPortatilesConvertibles').options.length-1;
+        var selTM = document.getElementById('numTelefonoMovil');
         var selectTelefonoMovil = document.getElementById('numTelefonoMovil').options.length-1;
+        var selS = document.getElementById('numSobremesa');
         var selectSobremesa = document.getElementById('numSobremesa').options.length-1;
+        var selT = document.getElementById('numTablets');
         var selectTablets = document.getElementById('numTablets').options.length-1;
+        var totalTlfn = document.getElementById('totalTelefonoMovil').value;
+        var totalP = document.getElementById('totalPortatiles').value;
+        var totalPC = document.getElementById('totalPortatilesConvertibles').value;
+        var totalS = document.getElementById('totalSobremesa').value;
+        var totalT = document.getElementById('totalTablets').value;
 
 
         //actualizar el valor del input horaInicio a la vez que se elige otro option en el select hora
@@ -285,14 +315,14 @@
             var fechaHoraActual = new Date();
             var fechaHoraElegida = new Date(fechaHora);
             //les dejo un margen para poder reservar de 30 minutos en la hora elegida para que no de error al enviar el formulario en las validaciones, porque si no está este parámetro, al enviar el formulario, la hora elegida ya habrá pasado y no dejará reservar en esa franja horaria seleccionada
-            fechaHoraElegida.setMinutes(fechaHoraElegida.getMinutes() + 900);
+            fechaHoraElegida.setMinutes(fechaHoraElegida.getMinutes() + 30);
             //mostrar el alert con id alert solo cuando se seleccione un option en el select, no mostrarlo al cargar la pagina
             if (document.getElementById("hora").value != "") {
                 if (fechaHoraElegida < fechaHoraActual) {
-                    document.getElementById("alert").style.display = "block";
+                    document.getElementById("alert").removeAttribute("hidden");
                     document.getElementById("hora").value = "";
                 } else {
-                    document.getElementById("alert").style.display = "none";
+                    document.getElementById("alert").setAttribute("hidden", "true");
                 }
             }
         });
@@ -356,6 +386,11 @@
             if (document.getElementById("hora").value == "") {
                 document.getElementById("tipos").setAttribute("disabled", "true");
                 document.getElementById("tipos").value = "";
+                selP.setAttribute("hidden", "true");
+                selT.setAttribute("hidden", "true");
+                selS.setAttribute("hidden", "true");
+                selPC.setAttribute("hidden", "true");
+                selTM.setAttribute("hidden", "true");
             } else {
                 document.getElementById("tipos").removeAttribute("disabled");
             }
