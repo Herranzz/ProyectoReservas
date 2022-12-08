@@ -69,7 +69,7 @@
                                 <?php $conn = mysqli_connect('localhost', 'root', '', 'reservaequiposs'); ?>
                                 <!--seelct con el numero de portatiles recogidos por la variable $portatiles de ReservasController-->
                                 <select id="numPortatiles" name="numPortatiles" title="portatiles disponibles" hidden>
-                                    <option value="" disabled></option>
+                                    <option value="" disabled selected>Nº</option>
                                     <!--codigo php que haga una consulta sql-->
                                     <?php
                                     //consulta sql que cuente el numero de portatiles libres que hay en la tabla inventario y lo pinte en el select
@@ -90,7 +90,7 @@
                                 </select>
 
                                 <select id="numPortatilesConvertibles" name="numPortatilesConvertibles" title="portatiles convertibles disponibles" hidden>
-                                    <option value="" disabled></option>
+                                    <option value="" disabled selected>Nº</option>
                                     <!--codigo php que haga una consulta sql-->
                                     <?php
                                     //consulta sql que cuente el numero de portatiles convertibles libres que hay en la tabla inventario y lo pinte en el select
@@ -130,7 +130,7 @@
                                 </select>
 
                                 <select id="numSobremesa" name="numSobremesa" title="sobremesa disponibles" hidden>
-                                    <option value="" disabled></option>
+                                    <option value="" disabled selected>Nº</option>
                                     <!--codigo php que haga una consulta sql-->
                                     <?php
                                     //consulta sql que cuente el numero de portatiles libres que hay en la tabla inventario y lo pinte en el select
@@ -150,7 +150,7 @@
                                 </select>
 
                                 <select id="numTablets" name="numTablets" title="tablets disponibles"  hidden>
-                                    <option value="" disabled></option>
+                                    <option value="" disabled selected>Nº</option>
                                     <!--codigo php que haga una consulta sql-->
                                     <?php
                                     //consulta sql que cuente el numero de portatiles libres que hay en la tabla inventario y lo pinte en el select
