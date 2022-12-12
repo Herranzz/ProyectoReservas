@@ -56,12 +56,21 @@ class UbicacionController extends Controller
 
     public function edit($id)
     {
+
+
         $ubicacion = Ubicacion::find($id);
         return view('ubicaciones.edit', ['ubicacion' => $ubicacion]);
     }
 
     public function update(Request $request)
     {
+        //validar el aula no se repita
+        $request->validate([
+            'aula' => 'unique:ubicaciones'
+        ], [
+            'aula.unique' => 'El aula ya existe'
+        ]);
+
         $ubicacion = Ubicacion::findOrFail($request->id);
         $ubicacion->id = $request->id;
         $ubicacion->aula = $request->aula;

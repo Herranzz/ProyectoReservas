@@ -58,6 +58,10 @@
                   <li class="nav-item">
                     <a class="nav-link" href=" {{ route('login.index')}}" >Login</a>
                   </li>
+                  <!--para registrar el admin si fuera necesario e ir a routes/web y modificar linea 36 quitandole el ->middleware('auth.admin') -->
+                  <li class="nav-item" hidden>
+                    <a class="nav-link" href=" {{ route('users.create')}}" >Registro</a>
+                  </li>
                 @endif
               </ul>
             </div>  
@@ -81,7 +85,7 @@
           <!--cdn interaction-->
           <!--<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/interaction/main.js'></script>-->
           
-          
+
 
     </body>
 </html>

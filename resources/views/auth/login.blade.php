@@ -25,7 +25,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control " name="password" required autocomplete="current-password">
@@ -33,7 +33,7 @@
                         </div>
 
                         @error('message')
-                            <div class="alert alert-danger" role="alert">Codigo o password incorrectos, inténtelo de nuevo</div>
+                            <div class="alert alert-danger" role="alert">Codigo o contraseña incorrectos, inténtelo de nuevo</div>
                         @enderror
 
                         <!-- boton para iniciar sesión -->

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('template_title', 'Reservas')
+@section('title', 'Reservas')
 
 @section('content')
 

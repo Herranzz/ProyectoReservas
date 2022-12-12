@@ -315,7 +315,7 @@
             var fechaHoraActual = new Date();
             var fechaHoraElegida = new Date(fechaHora);
             //les dejo un margen para poder reservar de 30 minutos en la hora elegida para que no de error al enviar el formulario en las validaciones, porque si no está este parámetro, al enviar el formulario, la hora elegida ya habrá pasado y no dejará reservar en esa franja horaria seleccionada
-            fechaHoraElegida.setMinutes(fechaHoraElegida.getMinutes() + 30);
+            fechaHoraElegida.setMinutes(fechaHoraElegida.getMinutes() + 500);
             //mostrar el alert con id alert solo cuando se seleccione un option en el select, no mostrarlo al cargar la pagina
             if (document.getElementById("hora").value != "") {
                 if (fechaHoraElegida < fechaHoraActual) {

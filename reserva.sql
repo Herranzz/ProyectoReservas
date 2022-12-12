@@ -53,5 +53,5 @@ create table if not exists reservas(
     numEquipos int(50) not null,
     horaInicio timestamp not null,
     color varchar(50) not null,
-        FOREIGN KEY (codigoProfesor) REFERENCES users(codigo)
+        FOREIGN KEY (codigoProfesor) REFERENCES users(codigo) on update cascade on delete cascade
 );
